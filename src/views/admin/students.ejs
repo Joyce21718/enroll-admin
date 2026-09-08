@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Students - Elementary Enrollment Management System</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .scrollbar-hidden::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-hidden {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="h-screen overflow-hidden bg-slate-50 text-slate-900">
+
+<div class="flex h-screen w-full overflow-hidden">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <%- include('../partials/sidebar', { activePage: 'students' }) %>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
+
+    <!-- NAVBAR -->
+
+    <%- include('../partials/navbar', {
+      pageTitle: 'Students'
+    }) %>
+
+
+    <!-- SCROLLABLE CONTENT -->
+
+    <div class="scrollbar-hidden flex-1 overflow-y-auto overflow-x-hidden">
+
+      <div class="mx-auto w-full max-w-[1500px] p-5 sm:p-8">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+          <div>
+
+            <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">
+              Student Records
+            </h1>
+
+            <p class="mt-1 text-sm text-slate-500">
+              Manage and monitor registered students.
+            </p>
+
+          </div>
+
+
+          <!-- ADD STUDENT -->
+
+          <button
+            id="addStudentBtn"
+            class="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition hover:bg-indigo-700"
+          >
+
+            <i data-lucide="user-plus" class="h-5 w-5"></i>
+
+            Add Student
+
+          </button>
+
+        </div>
+
+
+        <!-- =================================================
+             STAT CARDS
+        ================================================== -->
+
+        <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+
+
+          <!-- TOTAL STUDENTS -->
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+
+                <p class="text-xs font-semibold text-slate-500">
+                  Total Students
+                </p>
+
+                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                  248
+                </p>
+
+                <p class="mt-1 text-xs text-slate-500">
+                  Registered students
+                </p>
+
+              </div>
+
+              <div
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600"
+              >
+
+                <i data-lucide="users" class="h-5 w-5"></i>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ACTIVE -->
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+
+                <p class="text-xs font-semibold text-slate-500">
+                  Active Students
+                </p>
+
+                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                  231
+                </p>
+
+                <p class="mt-1 text-xs text-emerald-600">
+                  Currently enrolled
+                </p>
+
+              </div>
+
+              <div
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600"
+              >
+
+                <i data-lucide="user-check" class="h-5 w-5"></i>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- INACTIVE -->
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+
+                <p class="text-xs font-semibold text-slate-500">
+                  Inactive Students
+                </p>
+
+                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                  17
+                </p>
+
+                <p class="mt-1 text-xs text-red-600">
+                  Not currently enrolled
+                </p>
+
+              </div>
+
+              <div
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600"
+              >
+
+                <i data-lucide="user-x" class="h-5 w-5"></i>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- NEW STUDENTS -->
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+
+                <p class="text-xs font-semibold text-slate-500">
+                  New Students
+                </p>
+
+                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                  12
+                </p>
+
+                <p class="mt-1 text-xs text-indigo-600">
+                  Added this month
+                </p>
+
+              </div>
+
+              <div
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-50 text-violet-600"
+              >
+
+                <i data-lucide="user-round-plus" class="h-5 w-5"></i>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
+
+        <div class="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+
+          <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+
+            <!-- SEARCH -->
+
+            <div class="relative w-full lg:max-w-md">
+
+              <i
+                data-lucide="search"
+                class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+              ></i>
+
+              <input
+                id="searchInput"
+                type="text"
+                placeholder="Search student or guardian..."
+                class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+              >
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="flex flex-wrap gap-3">
+
+
+              <!-- GRADE -->
+
+              <select
+                id="gradeFilter"
+                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
+              >
+
+                <option value="all">
+                  All Grades
+                </option>
+
+                <option value="Kindergarten">
+                  Kindergarten
+                </option>
+
+                <option value="Grade 1">
+                  Grade 1
+                </option>
+
+                <option value="Grade 2">
+                  Grade 2
+                </option>
+
+                <option value="Grade 3">
+                  Grade 3
+                </option>
+
+                <option value="Grade 4">
+                  Grade 4
+                </option>
+
+                <option value="Grade 5">
+                  Grade 5
+                </option>
+
+                <option value="Grade 6">
+                  Grade 6
+                </option>
+
+              </select>
+
+
+              <!-- STATUS -->
+
+              <select
+                id="statusFilter"
+                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
+              >
+
+                <option value="all">
+                  All Status
+                </option>
+
+                <option value="Active">
+                  Active
+                </option>
+
+                <option value="Inactive">
+                  Inactive
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STUDENT TABLE
+        ================================================== -->
+
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+
+          <!-- TABLE HEADER -->
+
+          <div class="flex flex-col gap-3 border-b border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
+
+            <div>
+
+              <h2 class="text-base font-bold text-slate-900">
+                Student List
+              </h2>
+
+              <p class="mt-1 text-xs text-slate-500">
+                Registered elementary students
+              </p>
+
+            </div>
+
+
+            <!-- EXPORT -->
+
+            <button
+              id="exportBtn"
+              class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-bold text-slate-700 transition hover:bg-slate-50"
+            >
+
+              <i data-lucide="download" class="h-4 w-4"></i>
+
+              Export
+
+            </button>
+
+          </div>
+
+
+          <!-- TABLE -->
+
+          <div class="overflow-x-auto">
+
+            <table class="w-full min-w-[1100px]">
+
+              <thead class="bg-slate-50">
+
+                <tr class="text-left text-[10px] font-bold uppercase tracking-wider text-slate-500">
+
+                  <th class="px-6 py-4">
+                    Student
+                  </th>
+
+                  <th class="px-6 py-4">
+                    Student ID
+                  </th>
+
+                  <th class="px-6 py-4">
+                    Grade
+                  </th>
+
+                  <th class="px-6 py-4">
+                    Section
+                  </th>
+
+                  <th class="px-6 py-4">
+                    Parent / Guardian
+                  </th>
+
+                  <th class="px-6 py-4">
+                    Status
+                  </th>
+
+                  <th class="px-6 py-4">
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody
+                id="studentTable"
+                class="divide-y divide-slate-100"
+              >
+
+
+                <!-- =================================================
+                     JUAN
+                ================================================== -->
+
+                <tr
+                  class="student-row transition hover:bg-slate-50"
+                  data-search="juan dela cruz maria dela cruz"
+                  data-grade="Grade 1"
+                  data-status="Active"
+                >
+
+                  <td class="px-6 py-4">
+
+                    <div class="flex items-center gap-3">
+
+                      <div
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700"
+                      >
+                        JD
+                      </div>
+
+                      <div>
+
+                        <p class="text-sm font-bold text-slate-800">
+                          Juan Dela Cruz
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          Male
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    STU-2026-001
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm font-medium text-slate-600">
+                    Grade 1
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Mabini
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Maria Dela Cruz
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <span
+                      class="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700"
+                    >
+                      Active
+                    </span>
+
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <button
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      data-student="Juan Dela Cruz"
+                    >
+                      View
+                    </button>
+
+                  </td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     ANA
+                ================================================== -->
+
+                <tr
+                  class="student-row transition hover:bg-slate-50"
+                  data-search="ana santos pedro santos"
+                  data-grade="Grade 2"
+                  data-status="Active"
+                >
+
+                  <td class="px-6 py-4">
+
+                    <div class="flex items-center gap-3">
+
+                      <div
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700"
+                      >
+                        AS
+                      </div>
+
+                      <div>
+
+                        <p class="text-sm font-bold text-slate-800">
+                          Ana Santos
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          Female
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    STU-2026-002
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm font-medium text-slate-600">
+                    Grade 2
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Rizal
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Pedro Santos
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <span
+                      class="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700"
+                    >
+                      Active
+                    </span>
+
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <button
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      data-student="Ana Santos"
+                    >
+                      View
+                    </button>
+
+                  </td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     MARK
+                ================================================== -->
+
+                <tr
+                  class="student-row transition hover:bg-slate-50"
+                  data-search="mark reyes rosa reyes"
+                  data-grade="Grade 3"
+                  data-status="Active"
+                >
+
+                  <td class="px-6 py-4">
+
+                    <div class="flex items-center gap-3">
+
+                      <div
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700"
+                      >
+                        MR
+                      </div>
+
+                      <div>
+
+                        <p class="text-sm font-bold text-slate-800">
+                          Mark Reyes
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          Male
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    STU-2026-003
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm font-medium text-slate-600">
+                    Grade 3
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Bonifacio
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Rosa Reyes
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <span
+                      class="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700"
+                    >
+                      Active
+                    </span>
+
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <button
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      data-student="Mark Reyes"
+                    >
+                      View
+                    </button>
+
+                  </td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     LISA
+                ================================================== -->
+
+                <tr
+                  class="student-row transition hover:bg-slate-50"
+                  data-search="lisa mendoza carlos mendoza"
+                  data-grade="Grade 4"
+                  data-status="Inactive"
+                >
+
+                  <td class="px-6 py-4">
+
+                    <div class="flex items-center gap-3">
+
+                      <div
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-700"
+                      >
+                        LM
+                      </div>
+
+                      <div>
+
+                        <p class="text-sm font-bold text-slate-800">
+                          Lisa Mendoza
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          Female
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    STU-2026-004
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm font-medium text-slate-600">
+                    Grade 4
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Bonifacio
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Carlos Mendoza
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <span
+                      class="rounded-full bg-red-50 px-3 py-1.5 text-[10px] font-bold text-red-700"
+                    >
+                      Inactive
+                    </span>
+
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <button
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      data-student="Lisa Mendoza"
+                    >
+                      View
+                    </button>
+
+                  </td>
+
+                </tr>
+
+
+                <!-- =================================================
+                     JAMES
+                ================================================== -->
+
+                <tr
+                  class="student-row transition hover:bg-slate-50"
+                  data-search="james santos elena santos"
+                  data-grade="Kindergarten"
+                  data-status="Active"
+                >
+
+                  <td class="px-6 py-4">
+
+                    <div class="flex items-center gap-3">
+
+                      <div
+                        class="flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-700"
+                      >
+                        JS
+                      </div>
+
+                      <div>
+
+                        <p class="text-sm font-bold text-slate-800">
+                          James Santos
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          Male
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    STU-2026-005
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm font-medium text-slate-600">
+                    Kindergarten
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Sampaguita
+                  </td>
+
+
+                  <td class="px-6 py-4 text-sm text-slate-600">
+                    Elena Santos
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <span
+                      class="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700"
+                    >
+                      Active
+                    </span>
+
+                  </td>
+
+
+                  <td class="px-6 py-4">
+
+                    <button
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      data-student="James Santos"
+                    >
+                      View
+                    </button>
+
+                  </td>
+
+                </tr>
+
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+
+          <!-- =================================================
+               PAGINATION
+          ================================================== -->
+
+          <div
+            class="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between"
+          >
+
+            <p class="text-xs text-slate-500">
+
+              Showing
+
+              <span class="font-bold text-slate-700">
+                1–5
+              </span>
+
+              of
+
+              <span class="font-bold text-slate-700">
+                248
+              </span>
+
+              students
+
+            </p>
+
+
+            <div class="flex gap-2">
+
+              <button
+                disabled
+                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-300"
+              >
+                Previous
+              </button>
+
+              <button
+                class="rounded-lg bg-indigo-600 px-4 py-2 text-xs font-bold text-white"
+              >
+                1
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50"
+              >
+                2
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50"
+              >
+                3
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50"
+              >
+                Next
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="py-6 text-center">
+
+          <p class="text-xs text-slate-400">
+            Elementary Enrollment Management System © 2026
+          </p>
+
+        </footer>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script src="/js/students.js" defer></script>
+
+</body>
+</html>

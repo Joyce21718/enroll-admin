@@ -1,0 +1,285 @@
+<%- include('../partials/head', { pageTitle: 'Reports' }) %>
+
+<body class="h-screen bg-slate-50 text-slate-900">
+
+  <div class="flex h-screen w-full overflow-hidden">
+
+    <!-- Sidebar -->
+    <%- include('../partials/sidebar', { activePage: 'reports' }) %>
+
+    <div class="flex min-w-0 flex-1 flex-col">
+
+      <!-- Navbar -->
+      <%- include('../partials/navbar', { pageTitle: 'Reports' }) %>
+
+      <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+
+        <!-- Header -->
+        <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+
+          <div>
+            <h1 class="text-2xl font-bold text-slate-900">
+              Reports
+            </h1>
+
+            <p class="mt-1 text-sm text-slate-500">
+              Generate and monitor enrollment and student reports.
+            </p>
+          </div>
+
+          <button
+            onclick="generateReport()"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
+          >
+            <i data-lucide="file-plus" class="h-5 w-5"></i>
+            Generate Report
+          </button>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="mb-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Total Students
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  248
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-indigo-50 p-3 text-indigo-600">
+                <i data-lucide="users" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Enrolled This Year
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  124
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-emerald-50 p-3 text-emerald-600">
+                <i data-lucide="user-check" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Pending Applications
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  12
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-amber-50 p-3 text-amber-600">
+                <i data-lucide="clock" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Faculty
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  36
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-sky-50 p-3 text-sky-600">
+                <i data-lucide="graduation-cap" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Reports -->
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+
+          <!-- Enrollment Report -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+              <i data-lucide="clipboard-list" class="h-6 w-6"></i>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900">
+              Enrollment Report
+            </h3>
+
+            <p class="mt-2 text-sm leading-6 text-slate-500">
+              View enrollment applications, approvals, and declined applications.
+            </p>
+
+            <button
+              onclick="viewReport('Enrollment Report')"
+              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+            >
+              View Report
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+
+          </div>
+
+          <!-- Student Report -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+              <i data-lucide="users" class="h-6 w-6"></i>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900">
+              Student Report
+            </h3>
+
+            <p class="mt-2 text-sm leading-6 text-slate-500">
+              Generate a complete list of registered students by grade and section.
+            </p>
+
+            <button
+              onclick="viewReport('Student Report')"
+              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+            >
+              View Report
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+
+          </div>
+
+          <!-- Faculty Report -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
+              <i data-lucide="graduation-cap" class="h-6 w-6"></i>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900">
+              Faculty Report
+            </h3>
+
+            <p class="mt-2 text-sm leading-6 text-slate-500">
+              View faculty assignments, departments, and employment status.
+            </p>
+
+            <button
+              onclick="viewReport('Faculty Report')"
+              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+            >
+              View Report
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+
+          </div>
+
+          <!-- Section Report -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+              <i data-lucide="layers" class="h-6 w-6"></i>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900">
+              Section Report
+            </h3>
+
+            <p class="mt-2 text-sm leading-6 text-slate-500">
+              View section capacity, enrolled students, and assigned advisers.
+            </p>
+
+            <button
+              onclick="viewReport('Section Report')"
+              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+            >
+              View Report
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+
+          </div>
+
+          <!-- Academic Year Report -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-violet-50 text-violet-600">
+              <i data-lucide="calendar-days" class="h-6 w-6"></i>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900">
+              Academic Year Report
+            </h3>
+
+            <p class="mt-2 text-sm leading-6 text-slate-500">
+              Review enrollment records and statistics by academic year.
+            </p>
+
+            <button
+              onclick="viewReport('Academic Year Report')"
+              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+            >
+              View Report
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+
+          </div>
+
+          <!-- Summary -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-rose-50 text-rose-600">
+              <i data-lucide="bar-chart-3" class="h-6 w-6"></i>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900">
+              System Summary
+            </h3>
+
+            <p class="mt-2 text-sm leading-6 text-slate-500">
+              Generate an overall summary of the enrollment management system.
+            </p>
+
+            <button
+              onclick="viewReport('System Summary')"
+              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+            >
+              View Report
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="py-6 text-center text-xs text-slate-400">
+          © 2026 Elementary Enrollment Management System. All rights reserved.
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+ 
+<script src="/js/report.js" defer></script>
+
+</body>
+</html>

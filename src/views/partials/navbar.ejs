@@ -1,0 +1,100 @@
+<header
+  class="z-30 flex h-[82px] shrink-0 items-center justify-between border-b border-slate-200 bg-white px-4 shadow-sm sm:px-8"
+>
+  <!-- Left Side -->
+  <div class="flex min-w-0 items-center gap-3">
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobileMenuBtn"
+      type="button"
+      class="flex shrink-0 items-center justify-center rounded-xl p-2.5 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 lg:hidden"
+      title="Open Menu"
+      aria-label="Open Menu"
+    >
+      <i data-lucide="menu" class="h-6 w-6"></i>
+    </button>
+
+    <!-- Page Title -->
+    <div class="min-w-0">
+      <div class="flex items-center gap-3">
+
+        <h2 class="truncate text-xl font-bold text-slate-900">
+          <%= pageTitle || 'Admin Dashboard' %>
+        </h2>
+
+        <span
+          class="hidden rounded-full bg-indigo-50 px-2.5 py-1 text-[10px] font-bold text-indigo-600 sm:inline-flex"
+        >
+          v1.0
+        </span>
+
+      </div>
+
+      <p class="mt-0.5 hidden text-xs text-slate-500 sm:block">
+        Elementary Enrollment Management System
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- Right Side -->
+  <div class="flex shrink-0 items-center gap-2 sm:gap-3">
+
+    <!-- Notifications -->
+    <button
+      id="notificationBtn"
+      type="button"
+      class="relative rounded-xl p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
+      title="Notifications"
+      aria-label="Notifications"
+    >
+      <i data-lucide="bell" class="h-5 w-5"></i>
+
+      <!-- Notification Dot -->
+      <span
+        class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"
+      ></span>
+    </button>
+
+
+    <!-- Divider -->
+    <div class="hidden h-8 w-px bg-slate-200 sm:block"></div>
+
+
+    <!-- Admin Profile -->
+    <div class="hidden items-center gap-2 md:flex">
+
+      <!-- Avatar -->
+      <div
+        class="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white"
+      >
+        A
+      </div>
+
+      <!-- Name -->
+      <div class="leading-tight">
+        <p class="text-xs font-bold text-slate-800">
+          Administrator
+        </p>
+
+        <p class="text-[10px] text-slate-500">
+          System Admin
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- Mobile Avatar -->
+    <div
+      class="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600 text-sm font-bold text-white md:hidden"
+      title="Administrator"
+    >
+      A
+    </div>
+
+  </div>
+
+</header>

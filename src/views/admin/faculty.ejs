@@ -1,0 +1,564 @@
+<%- include('../partials/head', { pageTitle: 'Faculty' }) %>
+
+<body class="h-screen bg-slate-50 text-slate-900">
+
+  <div class="flex h-screen w-full overflow-hidden">
+
+    <!-- Sidebar -->
+    <%- include('../partials/sidebar', { activePage: 'faculty' }) %>
+
+    <!-- Main Content -->
+    <div class="flex min-w-0 flex-1 flex-col">
+
+      <!-- Navbar -->
+      <%- include('../partials/navbar', { pageTitle: 'Faculty' }) %>
+
+      <!-- Content -->
+      <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+
+        <!-- Header -->
+        <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+          <div>
+            <h1 class="text-2xl font-bold text-slate-900">
+              Faculty Records
+            </h1>
+
+            <p class="mt-1 text-sm text-slate-500">
+              Manage and monitor registered faculty members.
+            </p>
+          </div>
+
+          <button id="addFacultyBtn"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
+          >
+            <i data-lucide="plus" class="h-5 w-5"></i>
+            Add Faculty
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="mb-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+
+          <!-- Total Faculty -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Total Faculty
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  36
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-indigo-50 p-3 text-indigo-600">
+                <i data-lucide="users" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Faculty -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Active Faculty
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  33
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-emerald-50 p-3 text-emerald-600">
+                <i data-lucide="user-check" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inactive Faculty -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Inactive Faculty
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  3
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-rose-50 p-3 text-rose-600">
+                <i data-lucide="user-x" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Faculty -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  New Faculty
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  4
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-amber-50 p-3 text-amber-600">
+                <i data-lucide="user-plus" class="h-6 w-6"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Table Card -->
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+          <!-- Filters -->
+          <div class="border-b border-slate-200 p-5">
+
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+              <!-- Search -->
+              <div class="relative w-full lg:max-w-md">
+
+                <i
+                  data-lucide="search"
+                  class="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
+                ></i>
+
+                <input
+                  id="searchInput"
+                  type="text"
+                  placeholder="Search faculty..."
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                  
+                />
+
+              </div>
+
+              <!-- Filters -->
+              <div class="flex flex-col gap-3 sm:flex-row">
+
+                <select
+                  id="departmentFilter"
+                 
+                  class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 outline-none focus:border-indigo-500"
+                >
+                  <option value="">All Departments</option>
+                  <option value="Elementary">Elementary</option>
+                  <option value="Kindergarten">Kindergarten</option>
+                  <option value="Administration">Administration</option>
+                </select>
+
+                <select
+                  id="statusFilter"
+                
+                  class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 outline-none focus:border-indigo-500"
+                >
+                  <option value="">All Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+
+                <button id="exportFacultyBtn"
+                  class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50"
+                >
+                  <i data-lucide="download" class="h-4 w-4"></i>
+                  Export
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Table -->
+          <div class="overflow-x-auto">
+
+            <table class="w-full text-left text-sm">
+
+              <thead class="bg-slate-50 text-xs uppercase text-slate-500">
+                <tr>
+                  <th class="px-6 py-4 font-semibold">Faculty</th>
+                  <th class="px-6 py-4 font-semibold">Faculty ID</th>
+                  <th class="px-6 py-4 font-semibold">Department</th>
+                  <th class="px-6 py-4 font-semibold">Position</th>
+                  <th class="px-6 py-4 font-semibold">Contact</th>
+                  <th class="px-6 py-4 font-semibold">Status</th>
+                  <th class="px-6 py-4 text-right font-semibold">Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="facultyTable" class="divide-y divide-slate-100">
+
+                <!-- Faculty 1 -->
+                <tr class="faculty-row transition hover:bg-slate-50"
+                    data-department="Elementary"
+                    data-status="Active">
+
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-600">
+                        JD
+                      </div>
+
+                      <div>
+                        <p class="font-semibold text-slate-900">
+                          Juan Dela Cruz
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          juan.delacruz@email.com
+                        </p>
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td class="px-6 py-5 font-medium text-slate-700">
+                    FAC-2026-001
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Elementary
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Grade 1 Teacher
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    0917-123-4567
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+                      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                      Active
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+                    <button
+                      
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+                  </td>
+
+                </tr>
+
+                <!-- Faculty 2 -->
+                <tr class="faculty-row transition hover:bg-slate-50"
+                    data-department="Elementary"
+                    data-status="Active">
+
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-600">
+                        AS
+                      </div>
+
+                      <div>
+                        <p class="font-semibold text-slate-900">
+                          Ana Santos
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          ana.santos@email.com
+                        </p>
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td class="px-6 py-5 font-medium text-slate-700">
+                    FAC-2026-002
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Elementary
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Grade 2 Teacher
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    0918-234-5678
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+                      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                      Active
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+                    <button
+                      onclick="viewFaculty('Ana Santos')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+                  </td>
+
+                </tr>
+
+                <!-- Faculty 3 -->
+                <tr class="faculty-row transition hover:bg-slate-50"
+                    data-department="Elementary"
+                    data-status="Active">
+
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-600">
+                        MR
+                      </div>
+
+                      <div>
+                        <p class="font-semibold text-slate-900">
+                          Mark Reyes
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          mark.reyes@email.com
+                        </p>
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td class="px-6 py-5 font-medium text-slate-700">
+                    FAC-2026-003
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Elementary
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Grade 3 Teacher
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    0919-345-6789
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+                      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                      Active
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+                    <button
+                      onclick="viewFaculty('Mark Reyes')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+                  </td>
+
+                </tr>
+
+                <!-- Faculty 4 -->
+                <tr class="faculty-row transition hover:bg-slate-50"
+                    data-department="Kindergarten"
+                    data-status="Inactive">
+
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-600">
+                        LM
+                      </div>
+
+                      <div>
+                        <p class="font-semibold text-slate-900">
+                          Lisa Mendoza
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          lisa.mendoza@email.com
+                        </p>
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td class="px-6 py-5 font-medium text-slate-700">
+                    FAC-2026-004
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Kindergarten
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Kindergarten Teacher
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    0920-456-7890
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-600">
+                      <span class="h-2 w-2 rounded-full bg-rose-500"></span>
+                      Inactive
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+                    <button
+                      onclick="viewFaculty('Lisa Mendoza')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+                  </td>
+
+                </tr>
+
+                <!-- Faculty 5 -->
+                <tr class="faculty-row transition hover:bg-slate-50"
+                    data-department="Administration"
+                    data-status="Active">
+
+                  <td class="px-6 py-5">
+                    <div class="flex items-center gap-3">
+
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 font-bold text-indigo-600">
+                        JS
+                      </div>
+
+                      <div>
+                        <p class="font-semibold text-slate-900">
+                          James Santos
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                          james.santos@email.com
+                        </p>
+                      </div>
+
+                    </div>
+                  </td>
+
+                  <td class="px-6 py-5 font-medium text-slate-700">
+                    FAC-2026-005
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    Administration
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    School Coordinator
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    0921-567-8901
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+                      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                      Active
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+                    <button
+                      onclick="viewFaculty('James Santos')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <!-- Pagination -->
+          <div class="flex flex-col gap-3 border-t border-slate-200 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+
+            <p class="text-sm text-slate-500">
+              Showing <span class="font-semibold text-slate-700">1–5</span>
+              of <span class="font-semibold text-slate-700">36</span> faculty
+            </p>
+
+            <div class="flex items-center gap-2">
+
+              <button
+                class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-400"
+                disabled
+              >
+                Previous
+              </button>
+
+              <button
+                class="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white"
+              >
+                1
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+              >
+                2
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+              >
+                3
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+              >
+                Next
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="py-6 text-center text-xs text-slate-400">
+          © 2026 Elementary Enrollment Management System. All rights reserved.
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+<script src="/js/faculty.js" defer></script>
+
+</body>
+</html>

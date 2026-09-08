@@ -1,0 +1,367 @@
+<%- include('../partials/head', { pageTitle: 'Academic Year' }) %>
+
+<body class="h-screen bg-slate-50 text-slate-900">
+
+  <div class="flex h-screen w-full overflow-hidden">
+
+    <!-- Sidebar -->
+    <%- include('../partials/sidebar', { activePage: 'academic-year' }) %>
+
+    <!-- Main -->
+    <div class="flex min-w-0 flex-1 flex-col">
+
+      <!-- Navbar -->
+      <%- include('../partials/navbar', { pageTitle: 'Academic Year' }) %>
+
+      <!-- Content -->
+      <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+
+        <!-- Header -->
+        <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+
+          <div>
+            <h1 class="text-2xl font-bold text-slate-900">
+              Academic Year
+            </h1>
+
+            <p class="mt-1 text-sm text-slate-500">
+              Manage academic years and enrollment periods.
+            </p>
+          </div>
+
+          <button
+            onclick="addAcademicYear()"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
+          >
+            <i data-lucide="plus" class="h-5 w-5"></i>
+            Add Academic Year
+          </button>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="mb-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+
+          <!-- Total -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Total Academic Years
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  5
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-indigo-50 p-3 text-indigo-600">
+                <i data-lucide="calendar-days" class="h-6 w-6"></i>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Active -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Active Academic Year
+                </p>
+
+                <h2 class="mt-2 text-2xl font-bold text-slate-900">
+                  2026–2027
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-emerald-50 p-3 text-emerald-600">
+                <i data-lucide="calendar-check" class="h-6 w-6"></i>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Upcoming -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="flex items-center justify-between">
+
+              <div>
+                <p class="text-sm font-medium text-slate-500">
+                  Upcoming
+                </p>
+
+                <h2 class="mt-2 text-3xl font-bold text-slate-900">
+                  1
+                </h2>
+              </div>
+
+              <div class="rounded-xl bg-amber-50 p-3 text-amber-600">
+                <i data-lucide="calendar-clock" class="h-6 w-6"></i>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Table Card -->
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+          <!-- Search -->
+          <div class="border-b border-slate-200 p-5">
+
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+              <div class="relative w-full sm:max-w-md">
+
+                <i
+                  data-lucide="search"
+                  class="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
+                ></i>
+
+                <input
+                  id="searchInput"
+                  type="text"
+                  placeholder="Search academic year..."
+                  onkeyup="filterYears()"
+                  class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Table -->
+          <div class="overflow-x-auto">
+
+            <table class="w-full text-left text-sm">
+
+              <thead class="bg-slate-50 text-xs uppercase text-slate-500">
+                <tr>
+                  <th class="px-6 py-4 font-semibold">Academic Year</th>
+                  <th class="px-6 py-4 font-semibold">Start Date</th>
+                  <th class="px-6 py-4 font-semibold">End Date</th>
+                  <th class="px-6 py-4 font-semibold">Enrollment</th>
+                  <th class="px-6 py-4 font-semibold">Status</th>
+                  <th class="px-6 py-4 text-right font-semibold">Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="yearTable" class="divide-y divide-slate-100">
+
+                <!-- 2026-2027 -->
+                <tr class="year-row transition hover:bg-slate-50">
+
+                  <td class="px-6 py-5">
+                    <p class="font-semibold text-slate-900">
+                      2026–2027
+                    </p>
+
+                    <p class="text-xs text-slate-500">
+                      Current School Year
+                    </p>
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    June 1, 2026
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    March 31, 2027
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="font-medium text-indigo-600">
+                      Open
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5">
+
+                    <span class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+                      <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                      Active
+                    </span>
+
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+
+                    <button
+                      onclick="viewYear('2026–2027')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+
+                    <button
+                      onclick="editYear('2026–2027')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="pencil" class="h-5 w-5"></i>
+                    </button>
+
+                  </td>
+
+                </tr>
+
+                <!-- 2025-2026 -->
+                <tr class="year-row transition hover:bg-slate-50">
+
+                  <td class="px-6 py-5">
+                    <p class="font-semibold text-slate-900">
+                      2025–2026
+                    </p>
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    June 1, 2025
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    March 31, 2026
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="font-medium text-slate-500">
+                      Closed
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5">
+
+                    <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                      <span class="h-2 w-2 rounded-full bg-slate-400"></span>
+                      Completed
+                    </span>
+
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+
+                    <button
+                      onclick="viewYear('2025–2026')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+
+                  </td>
+
+                </tr>
+
+                <!-- 2024-2025 -->
+                <tr class="year-row transition hover:bg-slate-50">
+
+                  <td class="px-6 py-5">
+                    <p class="font-semibold text-slate-900">
+                      2024–2025
+                    </p>
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    June 1, 2024
+                  </td>
+
+                  <td class="px-6 py-5 text-slate-600">
+                    March 31, 2025
+                  </td>
+
+                  <td class="px-6 py-5">
+                    <span class="font-medium text-slate-500">
+                      Closed
+                    </span>
+                  </td>
+
+                  <td class="px-6 py-5">
+
+                    <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                      <span class="h-2 w-2 rounded-full bg-slate-400"></span>
+                      Completed
+                    </span>
+
+                  </td>
+
+                  <td class="px-6 py-5 text-right">
+
+                    <button
+                      onclick="viewYear('2024–2025')"
+                      class="rounded-lg p-2 text-slate-500 transition hover:bg-indigo-50 hover:text-indigo-600"
+                    >
+                      <i data-lucide="eye" class="h-5 w-5"></i>
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <!-- Pagination -->
+          <div class="flex flex-col gap-3 border-t border-slate-200 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+
+            <p class="text-sm text-slate-500">
+              Showing
+              <span class="font-semibold text-slate-700">1–3</span>
+              of
+              <span class="font-semibold text-slate-700">5</span>
+              academic years
+            </p>
+
+            <div class="flex items-center gap-2">
+
+              <button
+                class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-400"
+                disabled
+              >
+                Previous
+              </button>
+
+              <button
+                class="rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white"
+              >
+                1
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+              >
+                2
+              </button>
+
+              <button
+                class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50"
+              >
+                Next
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="py-6 text-center text-xs text-slate-400">
+          © 2026 Elementary Enrollment Management System. All rights reserved.
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+<script src="/js/academic.js" defer></script>
+
+
+</body>
+</html>
