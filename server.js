@@ -11,8 +11,18 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.get("/", (req, res) => {
+    res.redirect("/admin/login");
+});
+
+app.get("/admin/login", (req, res) => {
+    res.render("admin/login", {
+        activePage: "",
+        pageTitle: "Admin Login"
+    });
+});
+
+app.get("/admin/dashboard", (req, res) => {
     res.render("admin/dashboard", {
         activePage: "dashboard",
         pageTitle: "Admin Dashboard"
