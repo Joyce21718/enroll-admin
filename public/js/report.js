@@ -1,127 +1,185 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".settings-tab");
-    const panels = document.querySelectorAll(".settings-panel");
+    const generateReportBtn = document.getElementById("generateReportBtn");
+    const reportButtons = document.querySelectorAll(".view-report-btn");
 
-    const profileForm = document.getElementById("profileForm");
-    const passwordForm = document.getElementById("passwordForm");
-    const saveNotificationBtn = document.getElementById("saveNotificationBtn");
+    const reportModal = document.getElementById("reportModal");
+    const closeReportModal = document.getElementById("closeReportModal");
+    const closeReportModalBtn = document.getElementById("closeReportModalBtn");
 
-    const profileMessage = document.getElementById("profileMessage");
-    const passwordMessage = document.getElementById("passwordMessage");
+    const reportModalTitle = document.getElementById("reportModalTitle");
+    const reportTableBody = document.getElementById("reportTableBody");
+    const reportDate = document.getElementById("reportDate");
+    const downloadReportBtn = document.getElementById("downloadReportBtn");
 
-    const panelMap = {
-        profile: document.getElementById("profileSection"),
-        security: document.getElementById("securitySection"),
-        notifications: document.getElementById("notificationsSection"),
-        system: document.getElementById("systemSection")
+    let currentReport = "System Summary";
+
+    const reportData = {
+        "Enrollment Report": [
+            ["Total Applications", "124", "All"],
+            ["Approved Applications", "98", "Approved"],
+            ["Pending Applications", "12", "Pending"],
+            ["Declined Applications", "14", "Declined"]
+        ],
+
+        "Student Report": [
+            ["Total Students", "248", "Registered"],
+            ["Kindergarten", "24", "Active"],
+            ["Grade 1", "38", "Active"],
+            ["Grade 2", "42", "Active"],
+            ["Grade 3", "41", "Active"],
+            ["Grade 4", "39", "Active"],
+            ["Grade 5", "34", "Active"],
+            ["Grade 6", "30", "Active"]
+        ],
+
+        "Faculty Report": [
+            ["Total Faculty", "36", "Active"],
+            ["Elementary Faculty", "30", "Active"],
+            ["Administrative Staff", "6", "Active"]
+        ],
+
+        "Section Report": [
+            ["Total Sections", "18", "All"],
+            ["Active Sections", "16", "Active"],
+            ["Inactive Sections", "2", "Inactive"],
+            ["Enrolled Students", "248", "Enrolled"],
+            ["Available Slots", "112", "Available"]
+        ],
+
+        "Academic Year Report": [
+            ["Current Academic Year", "2026–2027", "Active"],
+            ["Previous Academic Year", "2025–2026", "Completed"],
+            ["Enrolled This Year", "124", "Active"]
+        ],
+
+        "System Summary": [
+            ["Total Students", "248", "Registered"],
+            ["Total Faculty", "36", "Active"],
+            ["Total Sections", "18", "All"],
+            ["Enrolled This Year", "124", "Enrolled"],
+            ["Pending Applications", "12", "Pending"],
+            ["Available Slots", "112", "Available"]
+        ]
     };
 
-    function showTab(tabName) {
-        tabs.forEach((tab) => {
-            const active = tab.dataset.settingsTab === tabName;
+    function openModal(reportName) {
+        currentReport = reportName;
 
-            tab.classList.toggle("bg-indigo-600", active);
-            tab.classList.toggle("text-white", active);
-            tab.classList.toggle("font-semibold", active);
+        const data = reportData[reportName] || reportData["System Summary"];
 
-            tab.classList.toggle("text-slate-600", !active);
-            tab.classList.toggle("font-medium", !active);
-            tab.classList.toggle("hover:bg-slate-50", !active);
+        reportModalTitle.textContent = reportName;
+        reportDate.textContent = new Date().toLocaleString();
+
+        reportTableBody.innerHTML = "";
+
+        data.forEach(([category, total, status]) => {
+            const row = document.createElement("tr");
+
+            const categoryCell = document.createElement("td");
+            categoryCell.className = "px-5 py-4 font-medium text-slate-700";
+            categoryCell.textContent = category;
+
+            const totalCell = document.createElement("td");
+            totalCell.className = "px-5 py-4 font-semibold text-slate-900";
+            totalCell.textContent = total;
+
+            const statusCell = document.createElement("td");
+            statusCell.className = "px-5 py-4";
+
+            const statusBadge = document.createElement("span");
+            statusBadge.className =
+                "inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-600";
+            statusBadge.textContent = status;
+
+            statusCell.appendChild(statusBadge);
+
+            row.appendChild(categoryCell);
+            row.appendChild(totalCell);
+            row.appendChild(statusCell);
+
+            reportTableBody.appendChild(row);
         });
 
-        panels.forEach((panel) => {
-            panel.classList.add("hidden");
-        });
+        reportModal.classList.remove("hidden");
+        reportModal.classList.add("flex");
 
-        if (panelMap[tabName]) {
-            panelMap[tabName].classList.remove("hidden");
+        if (typeof lucide !== "undefined") {
+            lucide.createIcons();
         }
     }
 
-    function showMessage(element, message, type = "success") {
-        element.textContent = message;
-        element.classList.remove(
-            "hidden",
-            "text-green-600",
-            "text-red-600",
-            "text-amber-600"
-        );
-
-        if (type === "error") {
-            element.classList.add("text-red-600");
-        } else if (type === "warning") {
-            element.classList.add("text-amber-600");
-        } else {
-            element.classList.add("text-green-600");
-        }
-
-        setTimeout(() => {
-            element.classList.add("hidden");
-        }, 3000);
+    function closeModal() {
+        reportModal.classList.add("hidden");
+        reportModal.classList.remove("flex");
     }
 
-    tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-            showTab(tab.dataset.settingsTab);
+    function downloadReport() {
+        const data = reportData[currentReport] || [];
+
+        const rows = [
+            ["Report", currentReport],
+            ["Generated", new Date().toLocaleString()],
+            [],
+            ["Category", "Total", "Status"],
+            ...data
+        ];
+
+        const csvContent = rows
+            .map((row) =>
+                row
+                    .map((value) => `"${String(value).replaceAll('"', '""')}"`)
+                    .join(",")
+            )
+            .join("\n");
+
+        const blob = new Blob([csvContent], {
+            type: "text/csv;charset=utf-8;"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = `${currentReport
+            .toLowerCase()
+            .replaceAll(" ", "-")}.csv`;
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        URL.revokeObjectURL(url);
+    }
+
+    generateReportBtn.addEventListener("click", () => {
+        openModal("System Summary");
+    });
+
+    reportButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            openModal(button.dataset.report);
         });
     });
 
-    profileForm.addEventListener("submit", (event) => {
-        event.preventDefault();
+    closeReportModal.addEventListener("click", closeModal);
+    closeReportModalBtn.addEventListener("click", closeModal);
 
-        if (!profileForm.reportValidity()) {
-            return;
+    downloadReportBtn.addEventListener("click", downloadReport);
+
+    reportModal.addEventListener("click", (event) => {
+        if (event.target === reportModal) {
+            closeModal();
         }
-
-        showMessage(profileMessage, "Profile changes saved successfully.");
     });
 
-    passwordForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        if (!passwordForm.reportValidity()) {
-            return;
+    document.addEventListener("keydown", (event) => {
+        if (
+            event.key === "Escape" &&
+            !reportModal.classList.contains("hidden")
+        ) {
+            closeModal();
         }
-
-        const currentPassword = document.getElementById("currentPassword").value;
-        const newPassword = document.getElementById("newPassword").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
-
-        if (!currentPassword) {
-            showMessage(passwordMessage, "Enter your current password.", "error");
-            return;
-        }
-
-        if (newPassword !== confirmPassword) {
-            showMessage(passwordMessage, "New passwords do not match.", "error");
-            return;
-        }
-
-        if (newPassword === currentPassword) {
-            showMessage(
-                passwordMessage,
-                "New password must be different from the current password.",
-                "error"
-            );
-            return;
-        }
-
-        passwordForm.reset();
-
-        showMessage(
-            passwordMessage,
-            "Password changed successfully."
-        );
     });
-
-    if (saveNotificationBtn) {
-        saveNotificationBtn.addEventListener("click", () => {
-            showMessage(
-                profileMessage,
-                "Notification preferences saved successfully."
-            );
-        });
-    }
 
     if (typeof lucide !== "undefined") {
         lucide.createIcons();

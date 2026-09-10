@@ -1,4 +1,9 @@
-<%- include('../partials/head', { pageTitle: 'Reports' }) %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head', { pageTitle: 'Reports' }) %>
+</head>
 
 <body class="h-screen overflow-hidden bg-slate-50 text-slate-900">
 
@@ -39,7 +44,6 @@
 
                     <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                         <div class="flex items-center justify-between">
-
                             <div>
                                 <p class="text-sm font-medium text-slate-500">
                                     Total Students
@@ -53,13 +57,11 @@
                             <div class="rounded-xl bg-indigo-50 p-3 text-indigo-600">
                                 <i data-lucide="users" class="h-6 w-6"></i>
                             </div>
-
                         </div>
                     </div>
 
                     <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                         <div class="flex items-center justify-between">
-
                             <div>
                                 <p class="text-sm font-medium text-slate-500">
                                     Enrolled This Year
@@ -73,13 +75,11 @@
                             <div class="rounded-xl bg-emerald-50 p-3 text-emerald-600">
                                 <i data-lucide="user-check" class="h-6 w-6"></i>
                             </div>
-
                         </div>
                     </div>
 
                     <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                         <div class="flex items-center justify-between">
-
                             <div>
                                 <p class="text-sm font-medium text-slate-500">
                                     Pending Applications
@@ -93,13 +93,11 @@
                             <div class="rounded-xl bg-amber-50 p-3 text-amber-600">
                                 <i data-lucide="clock" class="h-6 w-6"></i>
                             </div>
-
                         </div>
                     </div>
 
                     <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                         <div class="flex items-center justify-between">
-
                             <div>
                                 <p class="text-sm font-medium text-slate-500">
                                     Faculty
@@ -113,7 +111,6 @@
                             <div class="rounded-xl bg-sky-50 p-3 text-sky-600">
                                 <i data-lucide="graduation-cap" class="h-6 w-6"></i>
                             </div>
-
                         </div>
                     </div>
 
@@ -293,7 +290,10 @@
             <div class="flex items-center justify-between border-b border-slate-200 px-6 py-5">
 
                 <div>
-                    <h2 id="reportModalTitle" class="text-lg font-bold text-slate-900">
+                    <h2
+                        id="reportModalTitle"
+                        class="text-lg font-bold text-slate-900"
+                    >
                         Report
                     </h2>
 
@@ -341,8 +341,10 @@
                             Generated
                         </p>
 
-                        <p id="reportDate" class="mt-2 text-sm font-bold text-slate-900">
-                        </p>
+                        <p
+                            id="reportDate"
+                            class="mt-2 text-sm font-bold text-slate-900"
+                        ></p>
                     </div>
 
                 </div>
@@ -354,14 +356,25 @@
                         <thead class="bg-slate-50 text-xs uppercase text-slate-500">
 
                             <tr>
-                                <th class="px-5 py-4 font-semibold">Category</th>
-                                <th class="px-5 py-4 font-semibold">Total</th>
-                                <th class="px-5 py-4 font-semibold">Status</th>
+                                <th class="px-5 py-4 font-semibold">
+                                    Category
+                                </th>
+
+                                <th class="px-5 py-4 font-semibold">
+                                    Total
+                                </th>
+
+                                <th class="px-5 py-4 font-semibold">
+                                    Status
+                                </th>
                             </tr>
 
                         </thead>
 
-                        <tbody id="reportTableBody" class="divide-y divide-slate-100"></tbody>
+                        <tbody
+                            id="reportTableBody"
+                            class="divide-y divide-slate-100"
+                        ></tbody>
 
                     </table>
 
