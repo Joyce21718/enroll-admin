@@ -1,267 +1,398 @@
 <%- include('../partials/head', { pageTitle: 'Settings' }) %>
 
-<body class="h-screen bg-slate-50 text-slate-900">
+<body class="h-screen overflow-hidden bg-slate-50 text-slate-900">
 
-  <div class="flex h-screen w-full overflow-hidden">
+    <div class="flex h-screen w-full overflow-hidden">
 
-    <!-- Sidebar -->
-    <%- include('../partials/sidebar', { activePage: 'settings' }) %>
+        <%- include('../partials/sidebar', { activePage: 'settings' }) %>
 
-    <div class="flex min-w-0 flex-1 flex-col">
+        <div class="flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
 
-      <!-- Navbar -->
-      <%- include('../partials/navbar', { pageTitle: 'Settings' }) %>
+            <%- include('../partials/navbar', { pageTitle: 'Settings' }) %>
 
-      <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+            <main class="flex-1 overflow-y-auto p-6 lg:p-8">
 
-        <!-- Header -->
-        <div class="mb-8">
+                <div class="mx-auto">
 
-          <h1 class="text-2xl font-bold text-slate-900">
-            System Settings
-          </h1>
+                    <div class="mb-8">
+                        <h1 class="text-2xl font-bold text-slate-900">
+                            System Settings
+                        </h1>
 
-          <p class="mt-1 text-sm text-slate-500">
-            Manage your account and system configuration.
-          </p>
+                        <p class="mt-1 text-sm text-slate-500">
+                            Manage your account and system configuration.
+                        </p>
+                    </div>
+
+                    <div class="grid gap-6 lg:grid-cols-3">
+
+                        <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+
+                            <button
+                                type="button"
+                                data-settings-tab="profile"
+                                class="settings-tab flex w-full items-center gap-3 rounded-xl bg-indigo-600 px-4 py-3 text-left text-sm font-semibold text-white"
+                            >
+                                <i data-lucide="user" class="h-5 w-5"></i>
+                                Profile
+                            </button>
+
+                            <button
+                                type="button"
+                                data-settings-tab="security"
+                                class="settings-tab mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-50"
+                            >
+                                <i data-lucide="lock" class="h-5 w-5"></i>
+                                Security
+                            </button>
+
+                            <button
+                                type="button"
+                                data-settings-tab="notifications"
+                                class="settings-tab mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-50"
+                            >
+                                <i data-lucide="bell" class="h-5 w-5"></i>
+                                Notifications
+                            </button>
+
+                            <button
+                                type="button"
+                                data-settings-tab="system"
+                                class="settings-tab mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-50"
+                            >
+                                <i data-lucide="settings-2" class="h-5 w-5"></i>
+                                System
+                            </button>
+
+                        </div>
+
+                        <div class="space-y-6 lg:col-span-2">
+
+                            <section id="profileSection" class="settings-panel rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                                <div class="mb-6">
+                                    <h2 class="text-lg font-bold text-slate-900">
+                                        Administrator Profile
+                                    </h2>
+
+                                    <p class="mt-1 text-sm text-slate-500">
+                                        Update your administrator account information.
+                                    </p>
+                                </div>
+
+                                <form id="profileForm">
+
+                                    <div class="grid gap-5 sm:grid-cols-2">
+
+                                        <div>
+                                            <label for="firstName" class="mb-2 block text-sm font-semibold text-slate-700">
+                                                First Name
+                                            </label>
+
+                                            <input
+                                                id="firstName"
+                                                name="firstName"
+                                                type="text"
+                                                value="Admin"
+                                                required
+                                                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                                            >
+                                        </div>
+
+                                        <div>
+                                            <label for="lastName" class="mb-2 block text-sm font-semibold text-slate-700">
+                                                Last Name
+                                            </label>
+
+                                            <input
+                                                id="lastName"
+                                                name="lastName"
+                                                type="text"
+                                                value="Administrator"
+                                                required
+                                                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                                            >
+                                        </div>
+
+                                        <div class="sm:col-span-2">
+                                            <label for="emailAddress" class="mb-2 block text-sm font-semibold text-slate-700">
+                                                Email Address
+                                            </label>
+
+                                            <input
+                                                id="emailAddress"
+                                                name="email"
+                                                type="email"
+                                                value="admin@school.edu"
+                                                required
+                                                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                                            >
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mt-6 flex items-center justify-between gap-4">
+                                        <p id="profileMessage" class="hidden text-sm font-medium"></p>
+
+                                        <button
+                                            id="saveSettingsBtn"
+                                            type="submit"
+                                            class="ml-auto inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
+                                        >
+                                            <i data-lucide="save" class="h-4 w-4"></i>
+                                            Save Changes
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                            </section>
+
+                            <section id="securitySection" class="settings-panel hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                                <div class="mb-6">
+                                    <h2 class="text-lg font-bold text-slate-900">
+                                        Security
+                                    </h2>
+
+                                    <p class="mt-1 text-sm text-slate-500">
+                                        Update your administrator password.
+                                    </p>
+                                </div>
+
+                                <form id="passwordForm">
+
+                                    <div class="space-y-5">
+
+                                        <div>
+                                            <label for="currentPassword" class="mb-2 block text-sm font-semibold text-slate-700">
+                                                Current Password
+                                            </label>
+
+                                            <input
+                                                id="currentPassword"
+                                                type="password"
+                                                required
+                                                placeholder="Enter current password"
+                                                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                                            >
+                                        </div>
+
+                                        <div>
+                                            <label for="newPassword" class="mb-2 block text-sm font-semibold text-slate-700">
+                                                New Password
+                                            </label>
+
+                                            <input
+                                                id="newPassword"
+                                                type="password"
+                                                required
+                                                minlength="6"
+                                                placeholder="Enter new password"
+                                                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                                            >
+                                        </div>
+
+                                        <div>
+                                            <label for="confirmPassword" class="mb-2 block text-sm font-semibold text-slate-700">
+                                                Confirm Password
+                                            </label>
+
+                                            <input
+                                                id="confirmPassword"
+                                                type="password"
+                                                required
+                                                minlength="6"
+                                                placeholder="Confirm new password"
+                                                class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+                                            >
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mt-6 flex items-center justify-between gap-4">
+                                        <p id="passwordMessage" class="hidden text-sm font-medium"></p>
+
+                                        <button
+                                            id="changePasswordBtn"
+                                            type="submit"
+                                            class="ml-auto inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                                        >
+                                            <i data-lucide="key-round" class="h-4 w-4"></i>
+                                            Change Password
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                            </section>
+
+                            <section id="notificationsSection" class="settings-panel hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                                <div class="mb-6">
+                                    <h2 class="text-lg font-bold text-slate-900">
+                                        Notifications
+                                    </h2>
+
+                                    <p class="mt-1 text-sm text-slate-500">
+                                        Manage system notification preferences.
+                                    </p>
+                                </div>
+
+                                <div class="divide-y divide-slate-100">
+
+                                    <div class="flex items-center justify-between gap-5 py-4">
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-700">
+                                                New Enrollment Applications
+                                            </p>
+
+                                            <p class="mt-1 text-xs text-slate-500">
+                                                Receive notifications when a new application is submitted.
+                                            </p>
+                                        </div>
+
+                                        <label class="relative inline-flex cursor-pointer items-center">
+                                            <input
+                                                id="enrollmentNotification"
+                                                type="checkbox"
+                                                class="peer sr-only"
+                                                checked
+                                            >
+
+                                            <span class="h-6 w-11 rounded-full bg-slate-200 transition peer-checked:bg-indigo-600"></span>
+                                            <span class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-center justify-between gap-5 py-4">
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-700">
+                                                Enrollment Status Updates
+                                            </p>
+
+                                            <p class="mt-1 text-xs text-slate-500">
+                                                Receive notifications when application status changes.
+                                            </p>
+                                        </div>
+
+                                        <label class="relative inline-flex cursor-pointer items-center">
+                                            <input
+                                                id="statusNotification"
+                                                type="checkbox"
+                                                class="peer sr-only"
+                                                checked
+                                            >
+
+                                            <span class="h-6 w-11 rounded-full bg-slate-200 transition peer-checked:bg-indigo-600"></span>
+                                            <span class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-center justify-between gap-5 py-4">
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-700">
+                                                System Announcements
+                                            </p>
+
+                                            <p class="mt-1 text-xs text-slate-500">
+                                                Receive important system announcements.
+                                            </p>
+                                        </div>
+
+                                        <label class="relative inline-flex cursor-pointer items-center">
+                                            <input
+                                                id="systemNotification"
+                                                type="checkbox"
+                                                class="peer sr-only"
+                                                checked
+                                            >
+
+                                            <span class="h-6 w-11 rounded-full bg-slate-200 transition peer-checked:bg-indigo-600"></span>
+                                            <span class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white transition peer-checked:translate-x-5"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="mt-6 flex justify-end">
+                                    <button
+                                        id="saveNotificationBtn"
+                                        type="button"
+                                        class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
+                                    >
+                                        <i data-lucide="save" class="h-4 w-4"></i>
+                                        Save Preferences
+                                    </button>
+                                </div>
+
+                            </section>
+
+                            <section id="systemSection" class="settings-panel hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                                <div class="mb-5">
+                                    <h2 class="text-lg font-bold text-slate-900">
+                                        System Information
+                                    </h2>
+
+                                    <p class="mt-1 text-sm text-slate-500">
+                                        Current system configuration.
+                                    </p>
+                                </div>
+
+                                <div class="divide-y divide-slate-100">
+
+                                    <div class="flex items-center justify-between gap-5 py-4">
+                                        <span class="text-sm text-slate-500">
+                                            System Name
+                                        </span>
+
+                                        <span class="text-right text-sm font-semibold text-slate-700">
+                                            Elementary Enrollment Management System
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center justify-between gap-5 py-4">
+                                        <span class="text-sm text-slate-500">
+                                            Academic Year
+                                        </span>
+
+                                        <span class="text-sm font-semibold text-slate-700">
+                                            2026–2027
+                                        </span>
+                                    </div>
+
+                                    <div class="flex items-center justify-between gap-5 py-4">
+                                        <span class="text-sm text-slate-500">
+                                            System Version
+                                        </span>
+
+                                        <span class="text-sm font-semibold text-slate-700">
+                                            1.0.0
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                    <div class="py-6 text-center text-xs text-slate-400">
+                        © 2026 Elementary Enrollment Management System. All rights reserved.
+                    </div>
+
+                </div>
+
+            </main>
 
         </div>
 
-        <div class="grid gap-6 lg:grid-cols-3">
-
-          <!-- Settings Navigation -->
-          <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-
-            <button
-              class="flex w-full items-center gap-3 rounded-xl bg-indigo-600 px-4 py-3 text-left text-sm font-semibold text-white"
-            >
-              <i data-lucide="user" class="h-5 w-5"></i>
-              Profile
-            </button>
-
-            <button
-              class="mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-50"
-            >
-              <i data-lucide="lock" class="h-5 w-5"></i>
-              Security
-            </button>
-
-            <button
-              class="mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-50"
-            >
-              <i data-lucide="bell" class="h-5 w-5"></i>
-              Notifications
-            </button>
-
-            <button
-              class="mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-slate-600 transition hover:bg-slate-50"
-            >
-              <i data-lucide="settings-2" class="h-5 w-5"></i>
-              System
-            </button>
-
-          </div>
-
-          <!-- Settings Content -->
-          <div class="space-y-6 lg:col-span-2">
-
-            <!-- Profile -->
-            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-
-              <div class="mb-6">
-                <h2 class="text-lg font-bold text-slate-900">
-                  Administrator Profile
-                </h2>
-
-                <p class="mt-1 text-sm text-slate-500">
-                  Update your administrator account information.
-                </p>
-              </div>
-
-              <div class="grid gap-5 sm:grid-cols-2">
-
-                <div>
-                  <label class="mb-2 block text-sm font-semibold text-slate-700">
-                    First Name
-                  </label>
-
-                  <input
-                    type="text"
-                    value="Admin"
-                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                  >
-                </div>
-
-                <div>
-                  <label class="mb-2 block text-sm font-semibold text-slate-700">
-                    Last Name
-                  </label>
-
-                  <input
-                    type="text"
-                    value="Administrator"
-                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                  >
-                </div>
-
-                <div class="sm:col-span-2">
-                  <label class="mb-2 block text-sm font-semibold text-slate-700">
-                    Email Address
-                  </label>
-
-                  <input
-                    type="email"
-                    value="admin@school.edu"
-                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                  >
-                </div>
-
-              </div>
-
-              <div class="mt-6 flex justify-end">
-
-                <button
-                  onclick="saveSettings()"
-                  class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
-                >
-                  <i data-lucide="save" class="h-4 w-4"></i>
-                  Save Changes
-                </button>
-
-              </div>
-
-            </div>
-
-            <!-- Security -->
-            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-
-              <div class="mb-6">
-                <h2 class="text-lg font-bold text-slate-900">
-                  Security
-                </h2>
-
-                <p class="mt-1 text-sm text-slate-500">
-                  Update your administrator password.
-                </p>
-              </div>
-
-              <div class="space-y-5">
-
-                <div>
-                  <label class="mb-2 block text-sm font-semibold text-slate-700">
-                    Current Password
-                  </label>
-
-                  <input
-                    type="password"
-                    placeholder="Enter current password"
-                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                  >
-                </div>
-
-                <div>
-                  <label class="mb-2 block text-sm font-semibold text-slate-700">
-                    New Password
-                  </label>
-
-                  <input
-                    type="password"
-                    placeholder="Enter new password"
-                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                  >
-                </div>
-
-                <div>
-                  <label class="mb-2 block text-sm font-semibold text-slate-700">
-                    Confirm Password
-                  </label>
-
-                  <input
-                    type="password"
-                    placeholder="Confirm new password"
-                    class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                  >
-                </div>
-
-              </div>
-
-              <div class="mt-6 flex justify-end">
-
-                <button
-                  onclick="changePassword()"
-                  class="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-                >
-                  <i data-lucide="key-round" class="h-4 w-4"></i>
-                  Change Password
-                </button>
-
-              </div>
-
-            </div>
-
-            <!-- System Info -->
-            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-
-              <div class="mb-5">
-                <h2 class="text-lg font-bold text-slate-900">
-                  System Information
-                </h2>
-
-                <p class="mt-1 text-sm text-slate-500">
-                  Current system configuration.
-                </p>
-              </div>
-
-              <div class="divide-y divide-slate-100">
-
-                <div class="flex items-center justify-between py-4">
-                  <span class="text-sm text-slate-500">
-                    System Name
-                  </span>
-
-                  <span class="text-sm font-semibold text-slate-700">
-                    Elementary Enrollment Management System
-                  </span>
-                </div>
-
-                <div class="flex items-center justify-between py-4">
-                  <span class="text-sm text-slate-500">
-                    Academic Year
-                  </span>
-
-                  <span class="text-sm font-semibold text-slate-700">
-                    2026–2027
-                  </span>
-                </div>
-
-                <div class="flex items-center justify-between py-4">
-                  <span class="text-sm text-slate-500">
-                    System Version
-                  </span>
-
-                  <span class="text-sm font-semibold text-slate-700">
-                    1.0.0
-                  </span>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- Footer -->
-        <div class="py-6 text-center text-xs text-slate-400">
-          © 2026 Elementary Enrollment Management System. All rights reserved.
-        </div>
-
-      </main>
     </div>
-  </div>
-<script src="/js/settings.js" defer></script>
 
+    <script src="/js/settings.js" defer></script>
 
 </body>
 </html>

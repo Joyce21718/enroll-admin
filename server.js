@@ -70,6 +70,13 @@ app.get("/admin/settings", (req, res) => {
         pageTitle: "Settings"
     });
 });
+
+app.get("/admin/chat", (req, res) => {
+    res.render("admin/chat", {
+        activePage: "chat",
+        pageTitle: "Chat"
+    });
+});
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

@@ -2,1147 +2,921 @@
 
 <body class="h-screen overflow-hidden bg-slate-50 text-slate-900 antialiased">
 
-  <div class="flex h-screen w-full overflow-hidden">
+    <div class="flex h-screen w-full overflow-hidden">
 
-    <%- include('../partials/sidebar', { activePage: 'dashboard' }) %>
+        <%- include('../partials/sidebar', { activePage: 'dashboard' }) %>
 
-    <main class="flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
+        <main class="flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
 
-        <%- include('../partials/navbar', {
-            pageTitle: 'Admin Dashboard'
-        }) %>
-  
-      <div class="scrollbar-hidden flex-1 overflow-y-auto overflow-x-hidden">
+            <%- include('../partials/navbar', { pageTitle: 'Admin Dashboard' }) %>
 
-        <div class="mx-auto p-5 sm:p-8">
+            <div class="scrollbar-hidden flex-1 overflow-y-auto overflow-x-hidden">
 
-          <section
-            class="fade-in mb-6 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50 to-violet-50 p-5"
-          >
+                <div class="mx-auto  p-5 sm:p-8">
 
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <section class="fade-in mb-6 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50 to-violet-50 p-5">
 
-              <div class="flex items-start gap-4">
+                        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
-                <div
-                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-200"
-                >
-                  <i data-lucide="clipboard-check" class="h-5 w-5"></i>
-                </div>
+                            <div class="flex items-start gap-4">
 
-                <div>
+                                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-200">
+                                    <i data-lucide="clipboard-check" class="h-5 w-5"></i>
+                                </div>
 
-                  <span
-                    class="text-[10px] font-bold uppercase tracking-widest text-indigo-600"
-                  >
-                    Priority
-                  </span>
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-600">
+                                        Priority
+                                    </span>
 
-                  <h3 class="mt-1 text-base font-bold text-slate-900">
-                    Review Pending Applications
-                  </h3>
+                                    <h3 class="mt-1 text-base font-bold text-slate-900">
+                                        Review Pending Applications
+                                    </h3>
 
-                  <p class="mt-1 text-xs text-slate-500">
-                    There are 24 enrollment applications waiting for review.
-                  </p>
+                                    <p class="mt-1 text-xs text-slate-500">
+                                        There are 24 enrollment applications waiting for review.
+                                    </p>
+                                </div>
 
-                </div>
+                            </div>
 
-              </div>
+                            <div class="flex gap-2">
 
+                                <button
+                                    id="reviewApplicationsBtn"
+                                    type="button"
+                                    class="rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md transition hover:bg-indigo-700"
+                                >
+                                    Review Applications
+                                </button>
 
-              <div class="flex gap-2">
+                                <button
+                                    id="viewReportsBtn"
+                                    type="button"
+                                    class="hidden rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 transition hover:bg-slate-50 sm:block"
+                                >
+                                    View Reports
+                                </button>
 
-                <button
-                  type="button"
-                  class="rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md transition hover:bg-indigo-700"
-                >
-                  Review Applications
-                </button>
+                            </div>
 
-                <button
-                  type="button"
-                  class="hidden rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 transition hover:bg-slate-50 sm:block"
-                >
-                  View Reports
-                </button>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-          <!-- =================================================
-               METRICS
-          ================================================== -->
-          <section class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-
-            <!-- Total -->
-            <div
-              class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-            >
-
-              <div class="flex items-start justify-between">
-
-                <div>
-
-                  <p class="text-xs font-semibold text-slate-500">
-                    Total Students
-                  </p>
-
-                  <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
-                    1,248
-                  </p>
-
-                  <p class="mt-2 text-xs font-medium text-emerald-600">
-                    +8.2% from last year
-                  </p>
-
-                </div>
-
-                <div
-                  class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600"
-                >
-                  <i data-lucide="users" class="h-5 w-5"></i>
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- Pending -->
-            <div
-              class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-            >
-
-              <div class="flex items-start justify-between">
-
-                <div>
-
-                  <p class="text-xs font-semibold text-slate-500">
-                    Pending Applications
-                  </p>
-
-                  <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
-                    24
-                  </p>
-
-                  <p class="mt-2 text-xs font-medium text-amber-600">
-                    Requires attention
-                  </p>
-
-                </div>
-
-                <div
-                  class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600"
-                >
-                  <i data-lucide="clock-3" class="h-5 w-5"></i>
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- Approved -->
-            <div
-              class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-            >
-
-              <div class="flex items-start justify-between">
-
-                <div>
-
-                  <p class="text-xs font-semibold text-slate-500">
-                    Approved
-                  </p>
-
-                  <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
-                    1,156
-                  </p>
-
-                  <p class="mt-2 text-xs font-medium text-emerald-600">
-                    92.6% approval rate
-                  </p>
-
-                </div>
-
-                <div
-                  class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600"
-                >
-                  <i data-lucide="badge-check" class="h-5 w-5"></i>
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- Declined -->
-            <div
-              class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-            >
-
-              <div class="flex items-start justify-between">
-
-                <div>
-
-                  <p class="text-xs font-semibold text-slate-500">
-                    Declined
-                  </p>
-
-                  <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
-                    68
-                  </p>
-
-                  <p class="mt-2 text-xs font-medium text-red-600">
-                    5.4% of applications
-                  </p>
-
-                </div>
-
-                <div
-                  class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600"
-                >
-                  <i data-lucide="badge-x" class="h-5 w-5"></i>
-                </div>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-          <section class="mb-6 grid grid-cols-1 gap-6 xl:grid-cols-3">
-
-            <div
-              class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm xl:col-span-2"
-            >
-
-              <div class="mb-6 flex items-center justify-between">
-
-                <div>
-
-                  <h3 class="text-base font-bold text-slate-900">
-                    Grade Distribution
-                  </h3>
-
-                  <p class="mt-1 text-xs text-slate-500">
-                    Current student enrollment by grade
-                  </p>
-
-                </div>
-
-                <button
-                  type="button"
-                  class="rounded-lg p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
-                >
-                  <i data-lucide="more-horizontal" class="h-5 w-5"></i>
-                </button>
-
-              </div>
-
-
-              <div class="space-y-4">
-
-                <!-- Kindergarten -->
-                <div>
-
-                  <div class="mb-1.5 flex justify-between text-xs">
-
-                    <span class="font-semibold text-slate-700">
-                      Kindergarten
-                    </span>
-
-                    <span class="font-bold text-slate-500">
-                      120
-                    </span>
-
-                  </div>
-
-                  <div class="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                    <div
-                      class="h-full rounded-full bg-indigo-500"
-                      style="width: 35%"
-                    ></div>
-
-                  </div>
-
-                </div>
-
-
-                <!-- Grade 1 -->
-                <div>
-
-                  <div class="mb-1.5 flex justify-between text-xs">
-
-                    <span class="font-semibold text-slate-700">
-                      Grade 1
-                    </span>
-
-                    <span class="font-bold text-slate-500">
-                      160
-                    </span>
-
-                  </div>
-
-                  <div class="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                    <div
-                      class="h-full rounded-full bg-indigo-500"
-                      style="width: 48%"
-                    ></div>
-
-                  </div>
-
-                </div>
-
-
-                <!-- Grade 2 -->
-                <div>
-
-                  <div class="mb-1.5 flex justify-between text-xs">
-
-                    <span class="font-semibold text-slate-700">
-                      Grade 2
-                    </span>
-
-                    <span class="font-bold text-slate-500">
-                      145
-                    </span>
-
-                  </div>
-
-                  <div class="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                    <div
-                      class="h-full rounded-full bg-indigo-500"
-                      style="width: 43%"
-                    ></div>
-
-                  </div>
-
-                </div>
-
-
-                <!-- Grade 3 -->
-                <div>
-
-                  <div class="mb-1.5 flex justify-between text-xs">
-
-                    <span class="font-semibold text-slate-700">
-                      Grade 3
-                    </span>
-
-                    <span class="font-bold text-slate-500">
-                      130
-                    </span>
-
-                  </div>
-
-                  <div class="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                    <div
-                      class="h-full rounded-full bg-indigo-500"
-                      style="width: 39%"
-                    ></div>
-
-                  </div>
-
-                </div>
-
-
-                <!-- Grade 4 -->
-                <div>
-
-                  <div class="mb-1.5 flex justify-between text-xs">
-
-                    <span class="font-semibold text-slate-700">
-                      Grade 4
-                    </span>
-
-                    <span class="font-bold text-slate-500">
-                      110
-                    </span>
-
-                  </div>
-
-                  <div class="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                    <div
-                      class="h-full rounded-full bg-indigo-500"
-                      style="width: 33%"
-                    ></div>
-
-                  </div>
-
-                </div>
-
-
-                <!-- Grade 5 -->
-                <div>
-
-                  <div class="mb-1.5 flex justify-between text-xs">
-
-                    <span class="font-semibold text-slate-700">
-                      Grade 5
-                    </span>
-
-                    <span class="font-bold text-slate-500">
-                      96
-                    </span>
-
-                  </div>
-
-                  <div class="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                    <div
-                      class="h-full rounded-full bg-indigo-500"
-                      style="width: 29%"
-                    ></div>
-
-                  </div>
-
-                </div>
-
-
-                <!-- Grade 6 -->
-                <div>
-
-                  <div class="mb-1.5 flex justify-between text-xs">
-
-                    <span class="font-semibold text-slate-700">
-                      Grade 6
-                    </span>
-
-                    <span class="font-bold text-slate-500">
-                      80
-                    </span>
-
-                  </div>
-
-                  <div class="h-2 overflow-hidden rounded-full bg-slate-100">
-
-                    <div
-                      class="h-full rounded-full bg-indigo-500"
-                      style="width: 24%"
-                    ></div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <!-- Quick Actions -->
-            <div
-              class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-            >
-
-              <h3 class="text-base font-bold text-slate-900">
-                Quick Actions
-              </h3>
-
-              <p class="mt-1 text-xs text-slate-500">
-                Frequently used administrator actions
-              </p>
-
-
-              <div class="mt-5 space-y-3">
-
-                <button
-                  type="button"
-                  class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-indigo-200 hover:bg-indigo-50"
-                >
-
-                  <span
-                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600"
-                  >
-                    <i data-lucide="user-plus" class="h-5 w-5"></i>
-                  </span>
-
-                  <span>
-
-                    <span class="block text-sm font-bold text-slate-800">
-                      Add New Student
-                    </span>
-
-                    <span class="block text-xs text-slate-500">
-                      Create student record
-                    </span>
-
-                  </span>
-
-                </button>
-
-
-                <button
-                  type="button"
-                  class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-emerald-200 hover:bg-emerald-50"
-                >
-
-                  <span
-                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600"
-                  >
-                    <i data-lucide="check-check" class="h-5 w-5"></i>
-                  </span>
-
-                  <span>
-
-                    <span class="block text-sm font-bold text-slate-800">
-                      Batch Approve
-                    </span>
-
-                    <span class="block text-xs text-slate-500">
-                      Approve applications
-                    </span>
-
-                  </span>
-
-                </button>
-
-
-                <button
-                  type="button"
-                  class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-blue-200 hover:bg-blue-50"
-                >
-
-                  <span
-                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600"
-                  >
-                    <i data-lucide="download" class="h-5 w-5"></i>
-                  </span>
-
-                  <span>
-
-                    <span class="block text-sm font-bold text-slate-800">
-                      Export Data
-                    </span>
-
-                    <span class="block text-xs text-slate-500">
-                      Download enrollment data
-                    </span>
-
-                  </span>
-
-                </button>
-
-
-                <button
-                  type="button"
-                  class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-violet-200 hover:bg-violet-50"
-                >
-
-                  <span
-                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-600"
-                  >
-                    <i data-lucide="send" class="h-5 w-5"></i>
-                  </span>
-
-                  <span>
-
-                    <span class="block text-sm font-bold text-slate-800">
-                      Send Notification
-                    </span>
-
-                    <span class="block text-xs text-slate-500">
-                      Notify parents and staff
-                    </span>
-
-                  </span>
-
-                </button>
-
-              </div>
-
-            </div>
-
-          </section>
-
-          <section
-            class="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
-          >
-
-            <div class="mb-5 flex items-center justify-between">
-
-              <div>
-
-                <h3 class="text-base font-bold text-slate-900">
-                  Recent Activity
-                </h3>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  Latest system activities
-                </p>
-
-              </div>
-
-              <button
-                type="button"
-                class="text-xs font-bold text-indigo-600 hover:text-indigo-700"
-              >
-                View All
-              </button>
-
-            </div>
-
-
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
-
-              <div class="rounded-xl bg-slate-50 p-4">
-
-                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
-                  <i data-lucide="check" class="h-4 w-4"></i>
-                </div>
-
-                <p class="text-sm font-semibold text-slate-800">
-                  Application approved
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  5 minutes ago
-                </p>
-
-              </div>
-
-
-              <div class="rounded-xl bg-slate-50 p-4">
-
-                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
-                  <i data-lucide="file-plus-2" class="h-4 w-4"></i>
-                </div>
-
-                <p class="text-sm font-semibold text-slate-800">
-                  New application received
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  18 minutes ago
-                </p>
-
-              </div>
-
-
-              <div class="rounded-xl bg-slate-50 p-4">
-
-                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
-                  <i data-lucide="user-pen" class="h-4 w-4"></i>
-                </div>
-
-                <p class="text-sm font-semibold text-slate-800">
-                  Student record updated
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  32 minutes ago
-                </p>
-
-              </div>
-
-
-              <div class="rounded-xl bg-slate-50 p-4">
-
-                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-red-100 text-red-600">
-                  <i data-lucide="x" class="h-4 w-4"></i>
-                </div>
-
-                <p class="text-sm font-semibold text-slate-800">
-                  Application declined
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  1 hour ago
-                </p>
-
-              </div>
-
-
-              <div class="rounded-xl bg-slate-50 p-4">
-
-                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-violet-100 text-violet-600">
-                  <i data-lucide="file-chart-column" class="h-4 w-4"></i>
-                </div>
-
-                <p class="text-sm font-semibold text-slate-800">
-                  Report generated
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  2 hours ago
-                </p>
-
-              </div>
-
-            </div>
-
-          </section>
-
-          <section
-            class="rounded-2xl border border-slate-200 bg-white shadow-sm"
-          >
-
-            <!-- Header -->
-            <div
-              class="flex flex-col gap-4 border-b border-slate-200 p-6 lg:flex-row lg:items-center lg:justify-between"
-            >
-
-              <div>
-
-                <h3 class="text-base font-bold text-slate-900">
-                  Recent Applications
-                </h3>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  Manage the latest enrollment applications
-                </p>
-
-              </div>
-
-              <div class="relative w-full lg:w-72">
-
-                <i
-                  data-lucide="search"
-                  class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-                ></i>
-
-                <input
-                  id="applicationSearch"
-                  type="text"
-                  placeholder="Search applications..."
-                  class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
-                >
-
-              </div>
-
-            </div>
-
-            <div class="overflow-x-auto">
-
-              <table class="w-full min-w-[900px] text-left">
-
-                <thead class="bg-slate-50">
-
-                  <tr class="text-[10px] font-bold uppercase tracking-wider text-slate-500">
-
-                    <th class="px-6 py-4">
-                      Student
-                    </th>
-
-                    <th class="px-6 py-4">
-                      Parent/Guardian
-                    </th>
-
-                    <th class="px-6 py-4">
-                      Grade
-                    </th>
-
-                    <th class="px-6 py-4">
-                      Date
-                    </th>
-
-                    <th class="px-6 py-4">
-                      Status
-                    </th>
-
-                    <th class="px-6 py-4">
-                      Processed By
-                    </th>
-
-                    <th class="px-6 py-4">
-                      Action
-                    </th>
-
-                  </tr>
-
-                </thead>
-
-
-                <tbody
-                  id="applicationsTable"
-                  class="divide-y divide-slate-100"
-                >
-
-                  <tr
-                    class="application-row transition hover:bg-slate-50"
-                    data-name="Juan Dela Cruz Maria Dela Cruz"
-                  >
-
-                    <td class="px-6 py-4">
-
-                      <div class="flex items-center gap-3">
-
-                        <div
-                          class="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700"
-                        >
-                          JD
                         </div>
 
-                        <span class="text-sm font-bold text-slate-800">
-                          Juan Dela Cruz
-                        </span>
+                    </section>
 
-                      </div>
+                    <section class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
-                    </td>
+                        <div class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Maria Dela Cruz
-                    </td>
+                            <div class="flex items-start justify-between">
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Grade 1
-                    </td>
+                                <div>
+                                    <p class="text-xs font-semibold text-slate-500">
+                                        Total Students
+                                    </p>
 
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Sep 8, 2026
-                    </td>
+                                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
+                                        1,248
+                                    </p>
 
-                    <td class="px-6 py-4">
+                                    <p class="mt-2 text-xs font-medium text-emerald-600">
+                                        +8.2% from last year
+                                    </p>
+                                </div>
 
-                      <span
-                        class="inline-flex rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-700"
-                      >
-                        Pending
-                      </span>
+                                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                                    <i data-lucide="users" class="h-5 w-5"></i>
+                                </div>
 
-                    </td>
+                            </div>
 
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Not Assigned
-                    </td>
-
-                    <td class="px-6 py-4">
-
-                      <button
-                        type="button"
-                        class="action-btn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 transition hover:bg-indigo-100"
-                        data-student="Juan Dela Cruz"
-                      >
-                        Review
-                      </button>
-
-                    </td>
-
-                  </tr>
-
-                  <tr
-                    class="application-row transition hover:bg-slate-50"
-                    data-name="Ana Santos Pedro Santos"
-                  >
-
-                    <td class="px-6 py-4">
-
-                      <div class="flex items-center gap-3">
-
-                        <div
-                          class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700"
-                        >
-                          AS
                         </div>
 
-                        <span class="text-sm font-bold text-slate-800">
-                          Ana Santos
-                        </span>
+                        <div class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-                      </div>
+                            <div class="flex items-start justify-between">
 
-                    </td>
+                                <div>
+                                    <p class="text-xs font-semibold text-slate-500">
+                                        Pending Applications
+                                    </p>
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Pedro Santos
-                    </td>
+                                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
+                                        24
+                                    </p>
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Grade 2
-                    </td>
+                                    <p class="mt-2 text-xs font-medium text-amber-600">
+                                        Requires attention
+                                    </p>
+                                </div>
 
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Sep 7, 2026
-                    </td>
+                                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                                    <i data-lucide="clock-3" class="h-5 w-5"></i>
+                                </div>
 
-                    <td class="px-6 py-4">
+                            </div>
 
-                      <span
-                        class="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700"
-                      >
-                        Approved
-                      </span>
-
-                    </td>
-
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Admin User
-                    </td>
-
-                    <td class="px-6 py-4">
-
-                      <button
-                        type="button"
-                        class="action-btn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
-                        data-student="Ana Santos"
-                      >
-                        View
-                      </button>
-
-                    </td>
-
-                  </tr>
-
-                  <tr
-                    class="application-row transition hover:bg-slate-50"
-                    data-name="Mark Reyes Rosa Reyes"
-                  >
-
-                    <td class="px-6 py-4">
-
-                      <div class="flex items-center gap-3">
-
-                        <div
-                          class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700"
-                        >
-                          MR
                         </div>
 
-                        <span class="text-sm font-bold text-slate-800">
-                          Mark Reyes
-                        </span>
+                        <div class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-                      </div>
+                            <div class="flex items-start justify-between">
 
-                    </td>
+                                <div>
+                                    <p class="text-xs font-semibold text-slate-500">
+                                        Approved
+                                    </p>
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Rosa Reyes
-                    </td>
+                                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
+                                        1,156
+                                    </p>
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Grade 3
-                    </td>
+                                    <p class="mt-2 text-xs font-medium text-emerald-600">
+                                        92.6% approval rate
+                                    </p>
+                                </div>
 
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Sep 7, 2026
-                    </td>
+                                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                                    <i data-lucide="badge-check" class="h-5 w-5"></i>
+                                </div>
 
-                    <td class="px-6 py-4">
+                            </div>
 
-                      <span
-                        class="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700"
-                      >
-                        Approved
-                      </span>
-
-                    </td>
-
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Admin User
-                    </td>
-
-                    <td class="px-6 py-4">
-
-                      <button
-                        type="button"
-                        class="action-btn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
-                        data-student="Mark Reyes"
-                      >
-                        View
-                      </button>
-
-                    </td>
-
-                  </tr>
-
-                  <tr
-                    class="application-row transition hover:bg-slate-50"
-                    data-name="Lisa Mendoza Carlos Mendoza"
-                  >
-
-                    <td class="px-6 py-4">
-
-                      <div class="flex items-center gap-3">
-
-                        <div
-                          class="flex h-9 w-9 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-700"
-                        >
-                          LM
                         </div>
 
-                        <span class="text-sm font-bold text-slate-800">
-                          Lisa Mendoza
-                        </span>
+                        <div class="fade-in rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-                      </div>
+                            <div class="flex items-start justify-between">
 
-                    </td>
+                                <div>
+                                    <p class="text-xs font-semibold text-slate-500">
+                                        Declined
+                                    </p>
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Carlos Mendoza
-                    </td>
+                                    <p class="mt-2 text-3xl font-extrabold tracking-tight text-slate-900">
+                                        68
+                                    </p>
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Grade 4
-                    </td>
+                                    <p class="mt-2 text-xs font-medium text-red-600">
+                                        5.4% of applications
+                                    </p>
+                                </div>
 
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Sep 6, 2026
-                    </td>
+                                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600">
+                                    <i data-lucide="badge-x" class="h-5 w-5"></i>
+                                </div>
 
-                    <td class="px-6 py-4">
+                            </div>
 
-                      <span
-                        class="inline-flex rounded-full bg-red-50 px-2.5 py-1 text-[10px] font-bold text-red-700"
-                      >
-                        Declined
-                      </span>
-
-                    </td>
-
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Admin User
-                    </td>
-
-                    <td class="px-6 py-4">
-
-                      <button
-                        type="button"
-                        class="action-btn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
-                        data-student="Lisa Mendoza"
-                      >
-                        View
-                      </button>
-
-                    </td>
-
-                  </tr>
-
-                  <tr
-                    class="application-row transition hover:bg-slate-50"
-                    data-name="James Santos Elena Santos"
-                  >
-
-                    <td class="px-6 py-4">
-
-                      <div class="flex items-center gap-3">
-
-                        <div
-                          class="flex h-9 w-9 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-700"
-                        >
-                          JS
                         </div>
 
-                        <span class="text-sm font-bold text-slate-800">
-                          James Santos
-                        </span>
+                    </section>
 
-                      </div>
+                    <section class="mb-6 grid grid-cols-1 gap-6 xl:grid-cols-3">
 
-                    </td>
+                        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm xl:col-span-2">
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Elena Santos
-                    </td>
+                            <div class="mb-6 flex items-center justify-between">
 
-                    <td class="px-6 py-4 text-sm text-slate-600">
-                      Kindergarten
-                    </td>
+                                <div>
+                                    <h3 class="text-base font-bold text-slate-900">
+                                        Grade Distribution
+                                    </h3>
 
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Sep 5, 2026
-                    </td>
+                                    <p class="mt-1 text-xs text-slate-500">
+                                        Current student enrollment by grade
+                                    </p>
+                                </div>
 
-                    <td class="px-6 py-4">
+                                <button
+                                    id="gradeMenuBtn"
+                                    type="button"
+                                    class="rounded-lg p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                                >
+                                    <i data-lucide="more-horizontal" class="h-5 w-5"></i>
+                                </button>
 
-                      <span
-                        class="inline-flex rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-700"
-                      >
-                        Pending
-                      </span>
+                            </div>
 
-                    </td>
+                            <div class="space-y-4">
 
-                    <td class="px-6 py-4 text-sm text-slate-500">
-                      Not Assigned
-                    </td>
+                                <div>
+                                    <div class="mb-1.5 flex justify-between text-xs">
+                                        <span class="font-semibold text-slate-700">
+                                            Kindergarten
+                                        </span>
+                                        <span class="font-bold text-slate-500">
+                                            120
+                                        </span>
+                                    </div>
 
-                    <td class="px-6 py-4">
+                                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                                        <div class="h-full rounded-full bg-indigo-500" style="width: 35%"></div>
+                                    </div>
+                                </div>
 
-                      <button
-                        type="button"
-                        class="action-btn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 transition hover:bg-indigo-100"
-                        data-student="James Santos"
-                      >
-                        Review
-                      </button>
+                                <div>
+                                    <div class="mb-1.5 flex justify-between text-xs">
+                                        <span class="font-semibold text-slate-700">
+                                            Grade 1
+                                        </span>
+                                        <span class="font-bold text-slate-500">
+                                            160
+                                        </span>
+                                    </div>
 
-                    </td>
+                                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                                        <div class="h-full rounded-full bg-indigo-500" style="width: 48%"></div>
+                                    </div>
+                                </div>
 
-                  </tr>
+                                <div>
+                                    <div class="mb-1.5 flex justify-between text-xs">
+                                        <span class="font-semibold text-slate-700">
+                                            Grade 2
+                                        </span>
+                                        <span class="font-bold text-slate-500">
+                                            145
+                                        </span>
+                                    </div>
 
-                </tbody>
+                                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                                        <div class="h-full rounded-full bg-indigo-500" style="width: 43%"></div>
+                                    </div>
+                                </div>
 
-              </table>
+                                <div>
+                                    <div class="mb-1.5 flex justify-between text-xs">
+                                        <span class="font-semibold text-slate-700">
+                                            Grade 3
+                                        </span>
+                                        <span class="font-bold text-slate-500">
+                                            130
+                                        </span>
+                                    </div>
+
+                                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                                        <div class="h-full rounded-full bg-indigo-500" style="width: 39%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="mb-1.5 flex justify-between text-xs">
+                                        <span class="font-semibold text-slate-700">
+                                            Grade 4
+                                        </span>
+                                        <span class="font-bold text-slate-500">
+                                            110
+                                        </span>
+                                    </div>
+
+                                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                                        <div class="h-full rounded-full bg-indigo-500" style="width: 33%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="mb-1.5 flex justify-between text-xs">
+                                        <span class="font-semibold text-slate-700">
+                                            Grade 5
+                                        </span>
+                                        <span class="font-bold text-slate-500">
+                                            96
+                                        </span>
+                                    </div>
+
+                                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                                        <div class="h-full rounded-full bg-indigo-500" style="width: 29%"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="mb-1.5 flex justify-between text-xs">
+                                        <span class="font-semibold text-slate-700">
+                                            Grade 6
+                                        </span>
+                                        <span class="font-bold text-slate-500">
+                                            80
+                                        </span>
+                                    </div>
+
+                                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                                        <div class="h-full rounded-full bg-indigo-500" style="width: 24%"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                            <h3 class="text-base font-bold text-slate-900">
+                                Quick Actions
+                            </h3>
+
+                            <p class="mt-1 text-xs text-slate-500">
+                                Frequently used administrator actions
+                            </p>
+
+                            <div class="mt-5 space-y-3">
+
+                                <button
+                                    id="addStudentBtn"
+                                    type="button"
+                                    class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-indigo-200 hover:bg-indigo-50"
+                                >
+                                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                                        <i data-lucide="user-plus" class="h-5 w-5"></i>
+                                    </span>
+
+                                    <span>
+                                        <span class="block text-sm font-bold text-slate-800">
+                                            Add New Student
+                                        </span>
+
+                                        <span class="block text-xs text-slate-500">
+                                            Create student record
+                                        </span>
+                                    </span>
+                                </button>
+
+                                <button
+                                    id="batchApproveBtn"
+                                    type="button"
+                                    class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-emerald-200 hover:bg-emerald-50"
+                                >
+                                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                                        <i data-lucide="check-check" class="h-5 w-5"></i>
+                                    </span>
+
+                                    <span>
+                                        <span class="block text-sm font-bold text-slate-800">
+                                            Batch Approve
+                                        </span>
+
+                                        <span class="block text-xs text-slate-500">
+                                            Approve applications
+                                        </span>
+                                    </span>
+                                </button>
+
+                                <button
+                                    id="exportDataBtn"
+                                    type="button"
+                                    class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-blue-200 hover:bg-blue-50"
+                                >
+                                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                                        <i data-lucide="download" class="h-5 w-5"></i>
+                                    </span>
+
+                                    <span>
+                                        <span class="block text-sm font-bold text-slate-800">
+                                            Export Data
+                                        </span>
+
+                                        <span class="block text-xs text-slate-500">
+                                            Download enrollment data
+                                        </span>
+                                    </span>
+                                </button>
+
+                                <button
+                                    id="sendNotificationBtn"
+                                    type="button"
+                                    class="flex w-full items-center gap-3 rounded-xl border border-slate-200 p-3 text-left transition hover:border-violet-200 hover:bg-violet-50"
+                                >
+                                    <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-600">
+                                        <i data-lucide="send" class="h-5 w-5"></i>
+                                    </span>
+
+                                    <span>
+                                        <span class="block text-sm font-bold text-slate-800">
+                                            Send Notification
+                                        </span>
+
+                                        <span class="block text-xs text-slate-500">
+                                            Notify parents and staff
+                                        </span>
+                                    </span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <section class="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+
+                        <div class="mb-5 flex items-center justify-between">
+
+                            <div>
+                                <h3 class="text-base font-bold text-slate-900">
+                                    Recent Activity
+                                </h3>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    Latest system activities
+                                </p>
+                            </div>
+
+                            <button
+                                id="viewAllActivityBtn"
+                                type="button"
+                                class="text-xs font-bold text-indigo-600 hover:text-indigo-700"
+                            >
+                                View All
+                            </button>
+
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+
+                            <div class="rounded-xl bg-slate-50 p-4">
+                                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600">
+                                    <i data-lucide="check" class="h-4 w-4"></i>
+                                </div>
+
+                                <p class="text-sm font-semibold text-slate-800">
+                                    Application approved
+                                </p>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    5 minutes ago
+                                </p>
+                            </div>
+
+                            <div class="rounded-xl bg-slate-50 p-4">
+                                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
+                                    <i data-lucide="file-plus-2" class="h-4 w-4"></i>
+                                </div>
+
+                                <p class="text-sm font-semibold text-slate-800">
+                                    New application received
+                                </p>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    18 minutes ago
+                                </p>
+                            </div>
+
+                            <div class="rounded-xl bg-slate-50 p-4">
+                                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
+                                    <i data-lucide="user-pen" class="h-4 w-4"></i>
+                                </div>
+
+                                <p class="text-sm font-semibold text-slate-800">
+                                    Student record updated
+                                </p>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    32 minutes ago
+                                </p>
+                            </div>
+
+                            <div class="rounded-xl bg-slate-50 p-4">
+                                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-red-100 text-red-600">
+                                    <i data-lucide="x" class="h-4 w-4"></i>
+                                </div>
+
+                                <p class="text-sm font-semibold text-slate-800">
+                                    Application declined
+                                </p>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    1 hour ago
+                                </p>
+                            </div>
+
+                            <div class="rounded-xl bg-slate-50 p-4">
+                                <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-violet-100 text-violet-600">
+                                    <i data-lucide="file-chart-column" class="h-4 w-4"></i>
+                                </div>
+
+                                <p class="text-sm font-semibold text-slate-800">
+                                    Report generated
+                                </p>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    2 hours ago
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+                        <div class="flex flex-col gap-4 border-b border-slate-200 p-6 lg:flex-row lg:items-center lg:justify-between">
+
+                            <div>
+                                <h3 class="text-base font-bold text-slate-900">
+                                    Recent Applications
+                                </h3>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    Manage the latest enrollment applications
+                                </p>
+                            </div>
+
+                            <div class="relative w-full lg:w-72">
+
+                                <i
+                                    data-lucide="search"
+                                    class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                                ></i>
+
+                                <input
+                                    id="applicationSearch"
+                                    type="text"
+                                    placeholder="Search applications..."
+                                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="overflow-x-auto">
+
+                            <table class="w-full min-w-[900px] text-left">
+
+                                <thead class="bg-slate-50">
+
+                                    <tr class="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+
+                                        <th class="px-6 py-4">Student</th>
+                                        <th class="px-6 py-4">Parent/Guardian</th>
+                                        <th class="px-6 py-4">Grade</th>
+                                        <th class="px-6 py-4">Date</th>
+                                        <th class="px-6 py-4">Status</th>
+                                        <th class="px-6 py-4">Processed By</th>
+                                        <th class="px-6 py-4">Action</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="applicationsTable" class="divide-y divide-slate-100">
+
+                                    <tr class="application-row transition hover:bg-slate-50" data-name="Juan Dela Cruz Maria Dela Cruz">
+
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700">
+                                                    JD
+                                                </div>
+
+                                                <span class="text-sm font-bold text-slate-800">
+                                                    Juan Dela Cruz
+                                                </span>
+
+                                            </div>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Maria Dela Cruz
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Grade 1
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Sep 8, 2026
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-700">
+                                                Pending
+                                            </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Not Assigned
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <button
+                                                type="button"
+                                                class="application-action-btn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 transition hover:bg-indigo-100"
+                                                data-student="Juan Dela Cruz"
+                                            >
+                                                Review
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="application-row transition hover:bg-slate-50" data-name="Ana Santos Pedro Santos">
+
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
+                                                    AS
+                                                </div>
+
+                                                <span class="text-sm font-bold text-slate-800">
+                                                    Ana Santos
+                                                </span>
+
+                                            </div>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Pedro Santos
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Grade 2
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Sep 7, 2026
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
+                                                Approved
+                                            </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Admin User
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <button
+                                                type="button"
+                                                class="application-action-btn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
+                                                data-student="Ana Santos"
+                                            >
+                                                View
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="application-row transition hover:bg-slate-50" data-name="Mark Reyes Rosa Reyes">
+
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
+                                                    MR
+                                                </div>
+
+                                                <span class="text-sm font-bold text-slate-800">
+                                                    Mark Reyes
+                                                </span>
+
+                                            </div>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Rosa Reyes
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Grade 3
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Sep 7, 2026
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
+                                                Approved
+                                            </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Admin User
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <button
+                                                type="button"
+                                                class="application-action-btn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
+                                                data-student="Mark Reyes"
+                                            >
+                                                View
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="application-row transition hover:bg-slate-50" data-name="Lisa Mendoza Carlos Mendoza">
+
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-700">
+                                                    LM
+                                                </div>
+
+                                                <span class="text-sm font-bold text-slate-800">
+                                                    Lisa Mendoza
+                                                </span>
+
+                                            </div>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Carlos Mendoza
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Grade 4
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Sep 6, 2026
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex rounded-full bg-red-50 px-2.5 py-1 text-[10px] font-bold text-red-700">
+                                                Declined
+                                            </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Admin User
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <button
+                                                type="button"
+                                                class="application-action-btn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
+                                                data-student="Lisa Mendoza"
+                                            >
+                                                View
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr class="application-row transition hover:bg-slate-50" data-name="James Santos Elena Santos">
+
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+
+                                                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-700">
+                                                    JS
+                                                </div>
+
+                                                <span class="text-sm font-bold text-slate-800">
+                                                    James Santos
+                                                </span>
+
+                                            </div>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Elena Santos
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-600">
+                                            Kindergarten
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Sep 5, 2026
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <span class="inline-flex rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-700">
+                                                Pending
+                                            </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-sm text-slate-500">
+                                            Not Assigned
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <button
+                                                type="button"
+                                                class="application-action-btn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 transition hover:bg-indigo-100"
+                                                data-student="James Santos"
+                                            >
+                                                Review
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
+
+                            <p id="applicationCount" class="text-xs text-slate-500">
+                                Showing
+                                <span class="font-bold text-slate-700">1–5</span>
+                                of
+                                <span class="font-bold text-slate-700">5</span>
+                                applications
+                            </p>
+
+                            <div class="flex gap-2">
+
+                                <button
+                                    id="previousApplicationBtn"
+                                    type="button"
+                                    disabled
+                                    class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-slate-300"
+                                >
+                                    Previous
+                                </button>
+
+                                <button
+                                    id="nextApplicationBtn"
+                                    type="button"
+                                    disabled
+                                    class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-slate-300"
+                                >
+                                    Next
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <footer class="py-6 text-center">
+
+                        <p class="text-xs text-slate-400">
+                            Elementary Enrollment Management System © 2026
+                        </p>
+
+                    </footer>
+
+                </div>
 
             </div>
 
-            <div
-              class="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between"
-            >
+        </main>
 
-              <p class="text-xs text-slate-500">
-                Showing
-                <span class="font-bold text-slate-700">1–5</span>
-                of
-                <span class="font-bold text-slate-700">24</span>
-                applications
-              </p>
+    </div>
 
-              <div class="flex gap-2">
+    <div
+        id="dashboardModal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm"
+    >
+
+        <div class="w-full max-w-lg rounded-2xl bg-white shadow-2xl">
+
+            <div class="flex items-center justify-between border-b border-slate-200 p-5">
+
+                <div>
+                    <h2 id="dashboardModalTitle" class="text-lg font-bold text-slate-900">
+                        Dashboard
+                    </h2>
+
+                    <p id="dashboardModalDescription" class="mt-1 text-xs text-slate-500">
+                        Dashboard action
+                    </p>
+                </div>
 
                 <button
-                  type="button"
-                  disabled
-                  class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-slate-300"
+                    id="closeDashboardModal"
+                    type="button"
+                    class="rounded-lg p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
                 >
-                  Previous
+                    <i data-lucide="x" class="h-5 w-5"></i>
                 </button>
-
-                <button
-                  type="button"
-                  class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-50"
-                >
-                  Next
-                </button>
-
-              </div>
 
             </div>
 
-          </section>
+            <div id="dashboardModalContent" class="p-5"></div>
 
-          <footer class="py-6 text-center">
+            <div class="flex justify-end border-t border-slate-200 p-5">
 
-            <p class="text-xs text-slate-400">
-              Elementary Enrollment Management System © 2026
-            </p>
+                <button
+                    id="closeDashboardModalBtn"
+                    type="button"
+                    class="rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                    Close
+                </button>
 
-          </footer>
+            </div>
 
         </div>
 
-      </div>
+    </div>
 
-    </main>
-
-  </div>
-
- <script src="/js/dashboard.js" defer></script>
+    <script src="/js/dashboard.js" defer></script>
 
 </body>
 </html>
