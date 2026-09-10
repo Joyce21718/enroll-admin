@@ -4,26 +4,21 @@
 
 <div class="flex h-screen w-full overflow-hidden">
 
-  <%- include('../partials/sidebar', { activePage: 'dashboard' }) %>
-
-
+  <%- include('../partials/sidebar', { activePage: 'enrollment' }) %>
 
   <main class="flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
 
-        <%- include('../partials/navbar', {
-            pageTitle: 'Admin Dashboard'
-        }) %>
+    <%- include('../partials/navbar', {
+        pageTitle: 'Enrollment'
+    }) %>
 
     <div class="scrollbar-hidden flex-1 overflow-y-auto overflow-x-hidden">
 
-      <div class="mx-auto w-full max-w-[1500px] p-5 sm:p-8">
+      <div class="mx-auto p-5 sm:p-8">
 
-
-        <!-- Page Header -->
         <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
           <div>
-
             <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">
               Enrollment Applications
             </h1>
@@ -31,172 +26,107 @@
             <p class="mt-1 text-sm text-slate-500">
               Review, approve, or decline student applications.
             </p>
-
           </div>
 
-
-          <!-- Add Application -->
           <button
             id="addApplicationBtn"
+            type="button"
             class="flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-200 transition hover:bg-indigo-700"
           >
-
             <i data-lucide="plus" class="h-5 w-5"></i>
-
             New Enrollment
-
           </button>
 
         </div>
 
-
-        <!-- =================================================
-             STAT CARDS
-        ================================================== -->
-
         <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
-
-          <!-- Total -->
           <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-
             <div class="flex items-center justify-between">
-
               <div>
-
                 <p class="text-xs font-semibold text-slate-500">
                   Total Applications
                 </p>
-
-                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                <p id="totalApplications" class="mt-2 text-3xl font-extrabold text-slate-900">
                   124
                 </p>
-
                 <p class="mt-1 text-xs text-slate-500">
                   This school year
                 </p>
-
               </div>
 
-              <div
-                class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600"
-              >
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
                 <i data-lucide="files" class="h-5 w-5"></i>
               </div>
-
             </div>
-
           </div>
 
-
-          <!-- Pending -->
           <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-
             <div class="flex items-center justify-between">
-
               <div>
-
                 <p class="text-xs font-semibold text-slate-500">
                   Pending
                 </p>
-
-                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                <p id="pendingApplications" class="mt-2 text-3xl font-extrabold text-slate-900">
                   12
                 </p>
-
                 <p class="mt-1 text-xs text-amber-600">
                   Needs review
                 </p>
-
               </div>
 
-              <div
-                class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600"
-              >
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                 <i data-lucide="clock-3" class="h-5 w-5"></i>
               </div>
-
             </div>
-
           </div>
 
-
-          <!-- Approved -->
           <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-
             <div class="flex items-center justify-between">
-
               <div>
-
                 <p class="text-xs font-semibold text-slate-500">
                   Approved
                 </p>
-
-                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                <p id="approvedApplications" class="mt-2 text-3xl font-extrabold text-slate-900">
                   98
                 </p>
-
                 <p class="mt-1 text-xs text-emerald-600">
                   Successfully enrolled
                 </p>
-
               </div>
 
-              <div
-                class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600"
-              >
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                 <i data-lucide="badge-check" class="h-5 w-5"></i>
               </div>
-
             </div>
-
           </div>
 
-
-          <!-- Declined -->
           <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-
             <div class="flex items-center justify-between">
-
               <div>
-
                 <p class="text-xs font-semibold text-slate-500">
                   Declined
                 </p>
-
-                <p class="mt-2 text-3xl font-extrabold text-slate-900">
+                <p id="declinedApplications" class="mt-2 text-3xl font-extrabold text-slate-900">
                   14
                 </p>
-
                 <p class="mt-1 text-xs text-red-600">
                   Applications declined
                 </p>
-
               </div>
 
-              <div
-                class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600"
-              >
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600">
                 <i data-lucide="badge-x" class="h-5 w-5"></i>
               </div>
-
             </div>
-
           </div>
 
         </div>
-
-
-        <!-- =================================================
-             FILTERS
-        ================================================== -->
 
         <div class="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
           <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
-
-            <!-- Search -->
             <div class="relative w-full lg:max-w-md">
 
               <i
@@ -213,71 +143,30 @@
 
             </div>
 
-
-            <!-- Filters -->
             <div class="flex flex-wrap gap-3">
 
               <select
                 id="gradeFilter"
                 class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
               >
-
-                <option value="all">
-                  All Grades
-                </option>
-
-                <option value="Kindergarten">
-                  Kindergarten
-                </option>
-
-                <option value="Grade 1">
-                  Grade 1
-                </option>
-
-                <option value="Grade 2">
-                  Grade 2
-                </option>
-
-                <option value="Grade 3">
-                  Grade 3
-                </option>
-
-                <option value="Grade 4">
-                  Grade 4
-                </option>
-
-                <option value="Grade 5">
-                  Grade 5
-                </option>
-
-                <option value="Grade 6">
-                  Grade 6
-                </option>
-
+                <option value="all">All Grades</option>
+                <option value="Kindergarten">Kindergarten</option>
+                <option value="Grade 1">Grade 1</option>
+                <option value="Grade 2">Grade 2</option>
+                <option value="Grade 3">Grade 3</option>
+                <option value="Grade 4">Grade 4</option>
+                <option value="Grade 5">Grade 5</option>
+                <option value="Grade 6">Grade 6</option>
               </select>
-
 
               <select
                 id="statusFilter"
                 class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
               >
-
-                <option value="all">
-                  All Status
-                </option>
-
-                <option value="Pending">
-                  Pending
-                </option>
-
-                <option value="Approved">
-                  Approved
-                </option>
-
-                <option value="Declined">
-                  Declined
-                </option>
-
+                <option value="all">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Declined">Declined</option>
               </select>
 
             </div>
@@ -286,18 +175,11 @@
 
         </div>
 
-
-        <!-- =================================================
-             APPLICATION TABLE
-        ================================================== -->
-
         <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-          <!-- Table Header -->
           <div class="flex flex-col gap-3 border-b border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
 
             <div>
-
               <h2 class="text-base font-bold text-slate-900">
                 Student Applications
               </h2>
@@ -305,25 +187,19 @@
               <p class="mt-1 text-xs text-slate-500">
                 Latest enrollment requests
               </p>
-
             </div>
-
 
             <button
               id="exportBtn"
+              type="button"
               class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-bold text-slate-700 transition hover:bg-slate-50"
             >
-
               <i data-lucide="download" class="h-4 w-4"></i>
-
               Export
-
             </button>
 
           </div>
 
-
-          <!-- Table -->
           <div class="overflow-x-auto">
 
             <table class="w-full min-w-[1000px]">
@@ -332,61 +208,42 @@
 
                 <tr class="text-left text-[10px] font-bold uppercase tracking-wider text-slate-500">
 
-                  <th class="px-6 py-4">
-                    Student
-                  </th>
-
-                  <th class="px-6 py-4">
-                    Parent / Guardian
-                  </th>
-
-                  <th class="px-6 py-4">
-                    Grade
-                  </th>
-
-                  <th class="px-6 py-4">
-                    Date
-                  </th>
-
-                  <th class="px-6 py-4">
-                    Status
-                  </th>
-
-                  <th class="px-6 py-4">
-                    Action
-                  </th>
+                  <th class="px-6 py-4">Student</th>
+                  <th class="px-6 py-4">Parent / Guardian</th>
+                  <th class="px-6 py-4">Grade</th>
+                  <th class="px-6 py-4">Date</th>
+                  <th class="px-6 py-4">Status</th>
+                  <th class="px-6 py-4">Action</th>
 
                 </tr>
 
               </thead>
 
+              <tbody id="applicationTable" class="divide-y divide-slate-100">
 
-              <tbody
-                id="applicationTable"
-                class="divide-y divide-slate-100"
-              >
-
-
-                <!-- Juan -->
                 <tr
                   class="application-row transition hover:bg-slate-50"
                   data-search="juan dela cruz maria dela cruz"
+                  data-student="Juan Dela Cruz"
+                  data-student-id="2026-001"
+                  data-parent="Maria Dela Cruz"
                   data-grade="Grade 1"
+                  data-date="Sep 8, 2026"
                   data-status="Pending"
+                  data-gender="Male"
+                  data-section="Mabini"
+                  data-address="Davao City"
                 >
 
                   <td class="px-6 py-4">
 
                     <div class="flex items-center gap-3">
 
-                      <div
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700"
-                      >
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700">
                         JD
                       </div>
 
                       <div>
-
                         <p class="text-sm font-bold text-slate-800">
                           Juan Dela Cruz
                         </p>
@@ -394,7 +251,6 @@
                         <p class="text-xs text-slate-500">
                           Student ID: 2026-001
                         </p>
-
                       </div>
 
                     </div>
@@ -414,20 +270,25 @@
                   </td>
 
                   <td class="px-6 py-4">
-
-                    <span
-                      class="rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-700"
-                    >
+                    <span class="status-badge rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-700">
                       Pending
                     </span>
-
                   </td>
 
                   <td class="px-6 py-4">
 
                     <button
-                      class="reviewBtn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 hover:bg-indigo-100"
+                      type="button"
+                      class="reviewBtn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 transition hover:bg-indigo-100"
                       data-student="Juan Dela Cruz"
+                      data-student-id="2026-001"
+                      data-parent="Maria Dela Cruz"
+                      data-grade="Grade 1"
+                      data-date="Sep 8, 2026"
+                      data-status="Pending"
+                      data-gender="Male"
+                      data-section="Mabini"
+                      data-address="Davao City"
                     >
                       Review
                     </button>
@@ -436,27 +297,29 @@
 
                 </tr>
 
-
-                <!-- Ana -->
                 <tr
                   class="application-row transition hover:bg-slate-50"
                   data-search="ana santos pedro santos"
+                  data-student="Ana Santos"
+                  data-student-id="2026-002"
+                  data-parent="Pedro Santos"
                   data-grade="Grade 2"
+                  data-date="Sep 7, 2026"
                   data-status="Approved"
+                  data-gender="Female"
+                  data-section="Rizal"
+                  data-address="Davao City"
                 >
 
                   <td class="px-6 py-4">
 
                     <div class="flex items-center gap-3">
 
-                      <div
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700"
-                      >
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
                         AS
                       </div>
 
                       <div>
-
                         <p class="text-sm font-bold text-slate-800">
                           Ana Santos
                         </p>
@@ -464,7 +327,6 @@
                         <p class="text-xs text-slate-500">
                           Student ID: 2026-002
                         </p>
-
                       </div>
 
                     </div>
@@ -484,20 +346,25 @@
                   </td>
 
                   <td class="px-6 py-4">
-
-                    <span
-                      class="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700"
-                    >
+                    <span class="status-badge rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700">
                       Approved
                     </span>
-
                   </td>
 
                   <td class="px-6 py-4">
 
                     <button
-                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      type="button"
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
                       data-student="Ana Santos"
+                      data-student-id="2026-002"
+                      data-parent="Pedro Santos"
+                      data-grade="Grade 2"
+                      data-date="Sep 7, 2026"
+                      data-status="Approved"
+                      data-gender="Female"
+                      data-section="Rizal"
+                      data-address="Davao City"
                     >
                       View
                     </button>
@@ -506,27 +373,29 @@
 
                 </tr>
 
-
-                <!-- Mark -->
                 <tr
                   class="application-row transition hover:bg-slate-50"
                   data-search="mark reyes rosa reyes"
+                  data-student="Mark Reyes"
+                  data-student-id="2026-003"
+                  data-parent="Rosa Reyes"
                   data-grade="Grade 3"
+                  data-date="Sep 7, 2026"
                   data-status="Approved"
+                  data-gender="Male"
+                  data-section="Bonifacio"
+                  data-address="Davao City"
                 >
 
                   <td class="px-6 py-4">
 
                     <div class="flex items-center gap-3">
 
-                      <div
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700"
-                      >
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
                         MR
                       </div>
 
                       <div>
-
                         <p class="text-sm font-bold text-slate-800">
                           Mark Reyes
                         </p>
@@ -534,7 +403,6 @@
                         <p class="text-xs text-slate-500">
                           Student ID: 2026-003
                         </p>
-
                       </div>
 
                     </div>
@@ -554,20 +422,25 @@
                   </td>
 
                   <td class="px-6 py-4">
-
-                    <span
-                      class="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700"
-                    >
+                    <span class="status-badge rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-bold text-emerald-700">
                       Approved
                     </span>
-
                   </td>
 
                   <td class="px-6 py-4">
 
                     <button
-                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      type="button"
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
                       data-student="Mark Reyes"
+                      data-student-id="2026-003"
+                      data-parent="Rosa Reyes"
+                      data-grade="Grade 3"
+                      data-date="Sep 7, 2026"
+                      data-status="Approved"
+                      data-gender="Male"
+                      data-section="Bonifacio"
+                      data-address="Davao City"
                     >
                       View
                     </button>
@@ -576,27 +449,29 @@
 
                 </tr>
 
-
-                <!-- Lisa -->
                 <tr
                   class="application-row transition hover:bg-slate-50"
                   data-search="lisa mendoza carlos mendoza"
+                  data-student="Lisa Mendoza"
+                  data-student-id="2026-004"
+                  data-parent="Carlos Mendoza"
                   data-grade="Grade 4"
+                  data-date="Sep 6, 2026"
                   data-status="Declined"
+                  data-gender="Female"
+                  data-section="Bonifacio"
+                  data-address="Davao City"
                 >
 
                   <td class="px-6 py-4">
 
                     <div class="flex items-center gap-3">
 
-                      <div
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-700"
-                      >
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-700">
                         LM
                       </div>
 
                       <div>
-
                         <p class="text-sm font-bold text-slate-800">
                           Lisa Mendoza
                         </p>
@@ -604,7 +479,6 @@
                         <p class="text-xs text-slate-500">
                           Student ID: 2026-004
                         </p>
-
                       </div>
 
                     </div>
@@ -624,20 +498,25 @@
                   </td>
 
                   <td class="px-6 py-4">
-
-                    <span
-                      class="rounded-full bg-red-50 px-3 py-1.5 text-[10px] font-bold text-red-700"
-                    >
+                    <span class="status-badge rounded-full bg-red-50 px-3 py-1.5 text-[10px] font-bold text-red-700">
                       Declined
                     </span>
-
                   </td>
 
                   <td class="px-6 py-4">
 
                     <button
-                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200"
+                      type="button"
+                      class="viewBtn rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-200"
                       data-student="Lisa Mendoza"
+                      data-student-id="2026-004"
+                      data-parent="Carlos Mendoza"
+                      data-grade="Grade 4"
+                      data-date="Sep 6, 2026"
+                      data-status="Declined"
+                      data-gender="Female"
+                      data-section="Bonifacio"
+                      data-address="Davao City"
                     >
                       View
                     </button>
@@ -646,27 +525,29 @@
 
                 </tr>
 
-
-                <!-- James -->
                 <tr
                   class="application-row transition hover:bg-slate-50"
                   data-search="james santos elena santos"
+                  data-student="James Santos"
+                  data-student-id="2026-005"
+                  data-parent="Elena Santos"
                   data-grade="Kindergarten"
+                  data-date="Sep 5, 2026"
                   data-status="Pending"
+                  data-gender="Male"
+                  data-section="Sampaguita"
+                  data-address="Davao City"
                 >
 
                   <td class="px-6 py-4">
 
                     <div class="flex items-center gap-3">
 
-                      <div
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-700"
-                      >
+                      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-xs font-bold text-violet-700">
                         JS
                       </div>
 
                       <div>
-
                         <p class="text-sm font-bold text-slate-800">
                           James Santos
                         </p>
@@ -674,7 +555,6 @@
                         <p class="text-xs text-slate-500">
                           Student ID: 2026-005
                         </p>
-
                       </div>
 
                     </div>
@@ -694,20 +574,25 @@
                   </td>
 
                   <td class="px-6 py-4">
-
-                    <span
-                      class="rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-700"
-                    >
+                    <span class="status-badge rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-700">
                       Pending
                     </span>
-
                   </td>
 
                   <td class="px-6 py-4">
 
                     <button
-                      class="reviewBtn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 hover:bg-indigo-100"
+                      type="button"
+                      class="reviewBtn rounded-lg bg-indigo-50 px-3 py-2 text-xs font-bold text-indigo-600 transition hover:bg-indigo-100"
                       data-student="James Santos"
+                      data-student-id="2026-005"
+                      data-parent="Elena Santos"
+                      data-grade="Kindergarten"
+                      data-date="Sep 5, 2026"
+                      data-status="Pending"
+                      data-gender="Male"
+                      data-section="Sampaguita"
+                      data-address="Davao City"
                     >
                       Review
                     </button>
@@ -722,41 +607,52 @@
 
           </div>
 
+          <div id="emptyApplicationState" class="hidden px-6 py-12 text-center">
 
-          <!-- Pagination -->
-          <div
-            class="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between"
-          >
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+              <i data-lucide="search-x" class="h-6 w-6"></i>
+            </div>
 
-            <p class="text-xs text-slate-500">
+            <h3 class="mt-4 text-sm font-bold text-slate-800">
+              No applications found
+            </h3>
 
-              Showing
-              <span class="font-bold text-slate-700">
-                1–5
-              </span>
-
-              of
-
-              <span class="font-bold text-slate-700">
-                124
-              </span>
-
-              applications
-
+            <p class="mt-1 text-xs text-slate-500">
+              Try changing your search or filters.
             </p>
 
+          </div>
 
-            <div class="flex gap-2">
+          <div class="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
+
+            <p class="text-xs text-slate-500">
+              Showing
+              <span id="showingRange" class="font-bold text-slate-700">
+                1–5
+              </span>
+              of
+              <span id="showingTotal" class="font-bold text-slate-700">
+                5
+              </span>
+              applications
+            </p>
+
+            <div class="flex items-center gap-2">
 
               <button
-                disabled
-                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-300"
+                id="prevPageBtn"
+                type="button"
+                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300"
               >
                 Previous
               </button>
 
+              <div id="paginationNumbers" class="flex gap-2"></div>
+
               <button
-                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50"
+                id="nextPageBtn"
+                type="button"
+                class="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300"
               >
                 Next
               </button>
@@ -767,14 +663,10 @@
 
         </div>
 
-
-        <!-- Footer -->
         <footer class="py-6 text-center">
-
           <p class="text-xs text-slate-400">
             Elementary Enrollment Management System © 2026
           </p>
-
         </footer>
 
       </div>
@@ -782,6 +674,352 @@
     </div>
 
   </main>
+
+</div>
+
+<div
+  id="applicationModal"
+  class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm"
+>
+
+  <div class="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+
+    <div class="flex items-center justify-between border-b border-slate-200 px-6 py-5">
+
+      <div>
+        <h2 class="text-lg font-bold text-slate-900">
+          Enrollment Application
+        </h2>
+
+        <p class="mt-1 text-xs text-slate-500">
+          Review student enrollment information
+        </p>
+      </div>
+
+      <button
+        id="closeApplicationModalBtn"
+        type="button"
+        class="rounded-lg p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+      >
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+
+    </div>
+
+    <div class="max-h-[70vh] overflow-y-auto p-6">
+
+      <div class="mb-6 flex items-center gap-4">
+
+        <div
+          id="modalInitials"
+          class="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-100 text-base font-bold text-indigo-700"
+        >
+          JD
+        </div>
+
+        <div>
+          <h3 id="modalStudentName" class="text-xl font-bold text-slate-900">
+            Juan Dela Cruz
+          </h3>
+
+          <p id="modalStudentId" class="mt-1 text-sm text-slate-500">
+            Student ID: 2026-001
+          </p>
+        </div>
+
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            Parent / Guardian
+          </p>
+          <p id="modalParent" class="mt-2 text-sm font-semibold text-slate-800">
+            Maria Dela Cruz
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            Grade Level
+          </p>
+          <p id="modalGrade" class="mt-2 text-sm font-semibold text-slate-800">
+            Grade 1
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            Gender
+          </p>
+          <p id="modalGender" class="mt-2 text-sm font-semibold text-slate-800">
+            Male
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            Section
+          </p>
+          <p id="modalSection" class="mt-2 text-sm font-semibold text-slate-800">
+            Mabini
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            Application Date
+          </p>
+          <p id="modalDate" class="mt-2 text-sm font-semibold text-slate-800">
+            Sep 8, 2026
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            Address
+          </p>
+          <p id="modalAddress" class="mt-2 text-sm font-semibold text-slate-800">
+            Davao City
+          </p>
+        </div>
+
+      </div>
+
+      <div class="mt-5 rounded-xl border border-slate-200 p-4">
+
+        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          Application Status
+        </p>
+
+        <div class="mt-3">
+          <span
+            id="modalStatus"
+            class="rounded-full bg-amber-50 px-3 py-1.5 text-[10px] font-bold text-amber-700"
+          >
+            Pending
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="flex justify-end gap-3 border-t border-slate-200 px-6 py-4">
+
+      <button
+        id="modalDeclineBtn"
+        type="button"
+        class="hidden rounded-xl border border-red-200 px-4 py-2.5 text-sm font-bold text-red-600 transition hover:bg-red-50"
+      >
+        Decline
+      </button>
+
+      <button
+        id="modalApproveBtn"
+        type="button"
+        class="hidden rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700"
+      >
+        Approve
+      </button>
+
+      <button
+        id="modalCloseBtn"
+        type="button"
+        class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div
+  id="addApplicationModal"
+  class="fixed inset-0 z-[110] hidden items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm"
+>
+
+  <div class="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+
+    <div class="flex items-center justify-between border-b border-slate-200 px-6 py-5">
+
+      <div>
+        <h2 class="text-lg font-bold text-slate-900">
+          New Enrollment
+        </h2>
+
+        <p class="mt-1 text-xs text-slate-500">
+          Enter the student's enrollment information
+        </p>
+      </div>
+
+      <button
+        id="closeAddApplicationModalBtn"
+        type="button"
+        class="rounded-lg p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+      >
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+
+    </div>
+
+    <form id="addApplicationForm">
+
+      <div class="max-h-[70vh] overflow-y-auto p-6">
+
+        <div class="grid gap-4 sm:grid-cols-2">
+
+          <div class="sm:col-span-2">
+
+            <label class="mb-2 block text-xs font-bold text-slate-600">
+              Student Name
+            </label>
+
+            <input
+              id="newStudentName"
+              type="text"
+              required
+              placeholder="Enter student name"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            >
+
+          </div>
+
+          <div>
+
+            <label class="mb-2 block text-xs font-bold text-slate-600">
+              Student ID
+            </label>
+
+            <input
+              id="newStudentId"
+              type="text"
+              required
+              placeholder="2026-006"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            >
+
+          </div>
+
+          <div>
+
+            <label class="mb-2 block text-xs font-bold text-slate-600">
+              Parent / Guardian
+            </label>
+
+            <input
+              id="newParent"
+              type="text"
+              required
+              placeholder="Enter parent or guardian"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            >
+
+          </div>
+
+          <div>
+
+            <label class="mb-2 block text-xs font-bold text-slate-600">
+              Grade Level
+            </label>
+
+            <select
+              id="newGrade"
+              required
+              class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
+            >
+              <option value="">Select grade</option>
+              <option value="Kindergarten">Kindergarten</option>
+              <option value="Grade 1">Grade 1</option>
+              <option value="Grade 2">Grade 2</option>
+              <option value="Grade 3">Grade 3</option>
+              <option value="Grade 4">Grade 4</option>
+              <option value="Grade 5">Grade 5</option>
+              <option value="Grade 6">Grade 6</option>
+            </select>
+
+          </div>
+
+          <div>
+
+            <label class="mb-2 block text-xs font-bold text-slate-600">
+              Gender
+            </label>
+
+            <select
+              id="newGender"
+              required
+              class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
+            >
+              <option value="">Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+
+          </div>
+
+          <div>
+
+            <label class="mb-2 block text-xs font-bold text-slate-600">
+              Section
+            </label>
+
+            <input
+              id="newSection"
+              type="text"
+              required
+              placeholder="Example: Mabini"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            >
+
+          </div>
+
+          <div>
+
+            <label class="mb-2 block text-xs font-bold text-slate-600">
+              Address
+            </label>
+
+            <input
+              id="newAddress"
+              type="text"
+              required
+              placeholder="Enter address"
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="flex justify-end gap-3 border-t border-slate-200 px-6 py-4">
+
+        <button
+          id="cancelAddApplicationBtn"
+          type="button"
+          class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-indigo-700"
+        >
+          Save Application
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
 
 </div>
 

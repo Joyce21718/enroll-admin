@@ -34,6 +34,12 @@ app.get("/admin/students", (req, res) => {
         pageTitle: "Students"
     });
 });
+app.get("/admin/grades", (req, res) => {
+    res.render("admin/grades", {
+        activePage: "grades",
+        pageTitle: "Student Grades"
+    });
+});
 app.get("/admin/faculty", (req, res) => {
     res.render("admin/faculty", {
         activePage: "faculty",
