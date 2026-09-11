@@ -4,538 +4,506 @@
     <%- include('../partials/head', { pageTitle: 'Chat' }) %>
 </head>
 
-<body class="h-screen overflow-hidden bg-slate-50 text-slate-900 antialiased">
+<body class="h-screen overflow-hidden bg-slate-100 text-slate-900 antialiased">
+    <div class="flex h-screen w-full overflow-hidden">
+        <%- include('../partials/sidebar', { activePage: 'chat' }) %>
 
-<div class="flex h-screen w-full overflow-hidden">
+        <main class="flex min-w-0 flex-1 flex-col overflow-hidden">
+            <%- include('../partials/navbar', { pageTitle: 'Chat' }) %>
 
-    <%- include('../partials/sidebar', { activePage: 'chat' }) %>
-
-    <main class="flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
-
-        <%- include('../partials/navbar', { pageTitle: 'Chat' }) %>
-
-        <main class="flex-1 overflow-y-auto p-5 sm:p-8">
-
-            <div class="mx-auto flex h-full flex-col">
-
-                <div class="mb-6">
-                    <h2 class="text-2xl font-bold text-slate-900">
-                        Chat
-                    </h2>
-
-                    <p class="mt-1 text-sm text-slate-500">
-                        Communicate with teachers and faculty members regarding school-related concerns.
-                    </p>
-                </div>
-
-                <div class="grid min-h-0 flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm lg:grid-cols-[340px_minmax(0,1fr)]">
-
-                    <aside class="flex min-h-0 flex-col border-b border-slate-200 lg:border-b-0 lg:border-r">
-
-                        <div class="border-b border-slate-200 p-5">
-
-                            <div class="flex items-center justify-between">
-
+            <div class="flex min-h-0 flex-1 flex-col p-3 sm:p-5 lg:p-6">
+                <div
+                    id="chatLayout"
+                    class="mx-auto flex min-h-0 w-full max-w-[1550px] flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+                >
+                    <aside
+                        id="conversationPanel"
+                        class="flex min-h-0 w-full flex-col border-r border-slate-200 bg-white lg:w-[330px] lg:shrink-0"
+                    >
+                        <div class="border-b border-slate-100 px-5 pb-4 pt-5">
+                            <div class="mb-5 flex items-center justify-between">
                                 <div>
-                                    <h3 class="font-bold text-slate-900">
-                                        Faculty Conversations
-                                    </h3>
-
-                                    <p class="mt-1 text-xs text-slate-500">
-                                        Messages from teachers
+                                    <h1 class="text-2xl font-bold tracking-tight text-slate-900">
+                                        Chats
+                                    </h1>
+                                    <p class="mt-1 text-xs text-slate-400">
+                                        Connect with faculty members
                                     </p>
                                 </div>
 
-                                <span
-                                    id="conversationCount"
-                                    class="rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-bold text-indigo-600"
+                                <button
+                                    type="button"
+                                    class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition hover:bg-blue-100 hover:text-blue-600"
+                                    title="New message"
                                 >
-                                    4
-                                </span>
-
+                                    <i data-lucide="square-pen" class="h-4 w-4"></i>
+                                </button>
                             </div>
 
-                            <div class="relative mt-4">
-
+                            <div class="relative">
                                 <i
                                     data-lucide="search"
-                                    class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                                    class="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
                                 ></i>
 
                                 <input
                                     id="chatSearch"
-                                    type="text"
-                                    placeholder="Search teacher..."
-                                    class="w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-9 pr-3 text-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-                                >
-
+                                    type="search"
+                                    placeholder="Search Messenger..."
+                                    class="h-11 w-full rounded-xl border-0 bg-slate-100 pl-11 pr-4 text-sm text-slate-700 outline-none ring-0 placeholder:text-slate-400 focus:bg-slate-50 focus:ring-2 focus:ring-blue-100"
+                                />
                             </div>
+                        </div>
 
+                        <div class="flex items-center justify-between px-5 py-3">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">
+                                Recent chats
+                            </h2>
+
+                            <span
+                                id="conversationCount"
+                                class="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold text-blue-600"
+                            >
+                                4
+                            </span>
                         </div>
 
                         <div
                             id="conversationList"
-                            class="flex-1 overflow-y-auto"
+                            class="min-h-0 flex-1 space-y-1 overflow-y-auto px-3 pb-4"
                         >
-
                             <button
                                 type="button"
+                                class="conversation-item group flex w-full items-center gap-3 rounded-xl bg-blue-600 px-3 py-3 text-left transition"
                                 data-teacher-id="teacher-1"
-                                class="conversation-item flex w-full items-center gap-3 border-b border-slate-100 bg-indigo-50 px-5 py-4 text-left transition hover:bg-indigo-50"
                             >
-
                                 <div class="relative shrink-0">
-
-                                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-indigo-600 font-bold text-white">
-                                        J
+                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-blue-100 text-sm font-bold text-blue-700">
+                                        JD
                                     </div>
 
-                                    <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-emerald-500"></span>
-
+                                    <span class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500"></span>
                                 </div>
 
                                 <div class="min-w-0 flex-1">
-
                                     <div class="flex items-center justify-between gap-2">
-
-                                        <p class="truncate text-sm font-semibold text-slate-900">
+                                        <p class="conversation-name truncate text-sm font-bold text-white">
                                             Juan Dela Cruz
                                         </p>
 
-                                        <span class="text-[10px] text-slate-400">
+                                        <span class="conversation-time shrink-0 text-[10px] text-blue-100">
                                             10:42 AM
                                         </span>
-
                                     </div>
 
-                                    <p class="mt-1 truncate text-xs text-slate-500">
-                                        Good morning, Admin. I have a question about my section.
-                                    </p>
+                                    <div class="mt-1 flex items-center justify-between gap-2">
+                                        <p class="conversation-preview truncate text-xs text-blue-100">
+                                            Thank you for the update.
+                                        </p>
 
+                                        <span class="conversation-unread hidden h-5 min-w-5 items-center justify-center rounded-full bg-white px-1.5 text-[10px] font-bold text-blue-600">
+                                            2
+                                        </span>
+                                    </div>
                                 </div>
-
-                                <span class="flex h-5 min-w-5 items-center justify-center rounded-full bg-indigo-600 px-1.5 text-[10px] font-bold text-white">
-                                    2
-                                </span>
-
                             </button>
 
                             <button
                                 type="button"
+                                class="conversation-item group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-slate-100"
                                 data-teacher-id="teacher-2"
-                                class="conversation-item flex w-full items-center gap-3 border-b border-slate-100 px-5 py-4 text-left transition hover:bg-slate-50"
                             >
-
                                 <div class="relative shrink-0">
-
-                                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-violet-600 font-bold text-white">
-                                        M
+                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-pink-100 text-sm font-bold text-pink-700">
+                                        MS
                                     </div>
 
+                                    <span class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500"></span>
                                 </div>
 
                                 <div class="min-w-0 flex-1">
-
                                     <div class="flex items-center justify-between gap-2">
-
-                                        <p class="truncate text-sm font-semibold text-slate-900">
+                                        <p class="conversation-name truncate text-sm font-bold text-slate-800">
                                             Maria Santos
                                         </p>
 
-                                        <span class="text-[10px] text-slate-400">
-                                            9:18 AM
+                                        <span class="conversation-time shrink-0 text-[10px] text-slate-400">
+                                            9:30 AM
                                         </span>
-
                                     </div>
 
-                                    <p class="mt-1 truncate text-xs text-slate-500">
-                                        Is there anything else needed for the report?
-                                    </p>
+                                    <div class="mt-1 flex items-center justify-between gap-2">
+                                        <p class="conversation-preview truncate text-xs text-slate-400">
+                                            Can you send the report?
+                                        </p>
 
+                                        <span class="conversation-unread hidden h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1.5 text-[10px] font-bold text-white">
+                                            1
+                                        </span>
+                                    </div>
                                 </div>
-
                             </button>
 
                             <button
                                 type="button"
+                                class="conversation-item group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-slate-100"
                                 data-teacher-id="teacher-3"
-                                class="conversation-item flex w-full items-center gap-3 border-b border-slate-100 px-5 py-4 text-left transition hover:bg-slate-50"
                             >
-
                                 <div class="relative shrink-0">
-
-                                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-amber-500 font-bold text-white">
-                                        M
+                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-amber-100 text-sm font-bold text-amber-700">
+                                        MR
                                     </div>
 
+                                    <span class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-slate-300"></span>
                                 </div>
 
                                 <div class="min-w-0 flex-1">
-
                                     <div class="flex items-center justify-between gap-2">
-
-                                        <p class="truncate text-sm font-semibold text-slate-900">
+                                        <p class="conversation-name truncate text-sm font-bold text-slate-800">
                                             Mark Reyes
                                         </p>
 
-                                        <span class="text-[10px] text-slate-400">
+                                        <span class="conversation-time shrink-0 text-[10px] text-slate-400">
                                             Yesterday
                                         </span>
-
                                     </div>
 
-                                    <p class="mt-1 truncate text-xs text-slate-500">
-                                        The class list has already been updated.
-                                    </p>
+                                    <div class="mt-1 flex items-center justify-between gap-2">
+                                        <p class="conversation-preview truncate text-xs text-slate-400">
+                                            See you tomorrow.
+                                        </p>
 
+                                        <span class="conversation-unread hidden h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1.5 text-[10px] font-bold text-white">
+                                            3
+                                        </span>
+                                    </div>
                                 </div>
-
                             </button>
 
                             <button
                                 type="button"
+                                class="conversation-item group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-slate-100"
                                 data-teacher-id="teacher-4"
-                                class="conversation-item flex w-full items-center gap-3 border-b border-slate-100 px-5 py-4 text-left transition hover:bg-slate-50"
                             >
-
                                 <div class="relative shrink-0">
-
-                                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-600 font-bold text-white">
-                                        A
+                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-violet-100 text-sm font-bold text-violet-700">
+                                        AM
                                     </div>
 
+                                    <span class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500"></span>
                                 </div>
 
                                 <div class="min-w-0 flex-1">
-
                                     <div class="flex items-center justify-between gap-2">
-
-                                        <p class="truncate text-sm font-semibold text-slate-900">
+                                        <p class="conversation-name truncate text-sm font-bold text-slate-800">
                                             Ana Mendoza
                                         </p>
 
-                                        <span class="text-[10px] text-slate-400">
-                                            Sep 8
+                                        <span class="conversation-time shrink-0 text-[10px] text-slate-400">
+                                            Monday
                                         </span>
-
                                     </div>
 
-                                    <p class="mt-1 truncate text-xs text-slate-500">
-                                        Can you check my assigned section?
-                                    </p>
+                                    <div class="mt-1 flex items-center justify-between gap-2">
+                                        <p class="conversation-preview truncate text-xs text-slate-400">
+                                            The meeting is confirmed.
+                                        </p>
 
+                                        <span class="conversation-unread hidden h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1.5 text-[10px] font-bold text-white">
+                                            1
+                                        </span>
+                                    </div>
                                 </div>
-
                             </button>
-
                         </div>
-
                     </aside>
 
-                    <section class="flex min-h-0 flex-1 flex-col">
+                    <section
+                        id="chatPanel"
+                        class="hidden min-h-0 min-w-0 flex-1 flex-col bg-white lg:flex"
+                    >
+                        <header class="flex h-[78px] shrink-0 items-center justify-between border-b border-slate-200 px-4 sm:px-6">
+                            <div class="flex min-w-0 items-center gap-3">
+                                <button
+                                    id="mobileChatBackBtn"
+                                    type="button"
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 lg:hidden"
+                                    title="Back to chats"
+                                >
+                                    <i data-lucide="arrow-left" class="h-5 w-5"></i>
+                                </button>
 
-                        <div class="flex items-center justify-between border-b border-slate-200 px-5 py-4 sm:px-6">
-
-                            <div class="flex items-center gap-3">
-
-                                <div class="relative">
-
+                                <div class="relative shrink-0">
                                     <div
                                         id="teacherAvatar"
-                                        class="flex h-11 w-11 items-center justify-center rounded-full bg-indigo-600 font-bold text-white"
+                                        class="flex h-11 w-11 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700"
                                     >
-                                        J
+                                        JD
                                     </div>
 
                                     <span
                                         id="teacherOnlineDot"
-                                        class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-emerald-500"
+                                        class="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500"
                                     ></span>
-
                                 </div>
 
-                                <div>
-
-                                    <h3
+                                <div class="min-w-0">
+                                    <h2
                                         id="chatUserName"
-                                        class="font-bold text-slate-900"
+                                        class="truncate text-sm font-bold text-slate-900 sm:text-base"
                                     >
                                         Juan Dela Cruz
-                                    </h3>
+                                    </h2>
 
                                     <p
                                         id="chatUserRole"
-                                        class="text-xs text-slate-500"
+                                        class="truncate text-xs text-slate-400"
                                     >
-                                        Grade 1 Adviser
+                                        Faculty Member
                                     </p>
 
                                     <p
                                         id="chatUserStatus"
-                                        class="text-xs text-emerald-600"
+                                        class="text-[10px] font-medium text-emerald-500"
                                     >
-                                        Online
+                                        Active now
                                     </p>
-
                                 </div>
-
                             </div>
 
-                            <button
-                                id="chatInfoBtn"
-                                type="button"
-                                title="Teacher Information"
-                                class="rounded-xl p-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
-                            >
-                                <i data-lucide="info" class="h-5 w-5"></i>
-                            </button>
+                            <div class="flex items-center gap-1 sm:gap-2">
+                                <button
+                                    type="button"
+                                    class="hidden h-9 w-9 items-center justify-center rounded-full text-blue-600 transition hover:bg-blue-50 sm:flex"
+                                    title="Voice call"
+                                >
+                                    <i data-lucide="phone" class="h-4 w-4"></i>
+                                </button>
 
-                        </div>
+                                <button
+                                    type="button"
+                                    class="hidden h-9 w-9 items-center justify-center rounded-full text-blue-600 transition hover:bg-blue-50 sm:flex"
+                                    title="Video call"
+                                >
+                                    <i data-lucide="video" class="h-4 w-4"></i>
+                                </button>
+
+                                <button
+                                    id="chatInfoBtn"
+                                    type="button"
+                                    class="flex h-9 w-9 items-center justify-center rounded-full text-blue-600 transition hover:bg-blue-50"
+                                    title="Conversation information"
+                                >
+                                    <i data-lucide="info" class="h-5 w-5"></i>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="hidden h-9 w-9 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 sm:flex"
+                                    title="More options"
+                                >
+                                    <i data-lucide="more-horizontal" class="h-5 w-5"></i>
+                                </button>
+                            </div>
+                        </header>
 
                         <div
                             id="messageContainer"
-                            class="flex-1 space-y-5 overflow-y-auto bg-slate-50 p-5 sm:p-6"
-                        >
+                            class="min-h-0 flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top,_#f8fbff,_#ffffff_45%)] px-4 py-6 sm:px-8"
+                        ></div>
 
-                            <div class="flex justify-start">
-
-                                <div class="max-w-[80%] sm:max-w-[65%]">
-
-                                    <div class="rounded-2xl rounded-bl-md border border-slate-200 bg-white px-4 py-3 shadow-sm">
-
-                                        <p class="text-sm leading-6 text-slate-700">
-                                            Good morning, Admin. I have a question about my assigned section.
-                                        </p>
-
-                                    </div>
-
-                                    <p class="mt-1 px-1 text-[10px] text-slate-400">
-                                        10:35 AM
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div class="flex justify-end">
-
-                                <div class="max-w-[80%] sm:max-w-[65%]">
-
-                                    <div class="rounded-2xl rounded-br-md bg-indigo-600 px-4 py-3 text-white shadow-sm">
-
-                                        <p class="text-sm leading-6">
-                                            Good morning, Sir Juan. How can I help you with your section?
-                                        </p>
-
-                                    </div>
-
-                                    <p class="mt-1 px-1 text-right text-[10px] text-slate-400">
-                                        10:38 AM
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div class="flex justify-start">
-
-                                <div class="max-w-[80%] sm:max-w-[65%]">
-
-                                    <div class="rounded-2xl rounded-bl-md border border-slate-200 bg-white px-4 py-3 shadow-sm">
-
-                                        <p class="text-sm leading-6 text-slate-700">
-                                            I would like to request an update regarding the student list.
-                                        </p>
-
-                                    </div>
-
-                                    <p class="mt-1 px-1 text-[10px] text-slate-400">
-                                        10:41 AM
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                            <div class="flex justify-end">
-
-                                <div class="max-w-[80%] sm:max-w-[65%]">
-
-                                    <div class="rounded-2xl rounded-br-md bg-indigo-600 px-4 py-3 text-white shadow-sm">
-
-                                        <p class="text-sm leading-6">
-                                            Sure. I will check the latest student records and update you.
-                                        </p>
-
-                                    </div>
-
-                                    <p class="mt-1 px-1 text-right text-[10px] text-slate-400">
-                                        10:42 AM
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="border-t border-slate-200 bg-white p-4 sm:p-5">
-
+                        <div class="shrink-0 border-t border-slate-100 bg-white px-3 py-3 sm:px-6 sm:py-4">
                             <form
                                 id="messageForm"
-                                class="flex items-end gap-3"
+                                class="flex items-end gap-2"
                             >
+                                <button
+                                    type="button"
+                                    class="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 sm:flex"
+                                    title="Attach file"
+                                >
+                                    <i data-lucide="paperclip" class="h-5 w-5"></i>
+                                </button>
 
-                                <div class="flex-1">
-
+                                <div class="flex min-w-0 flex-1 items-end rounded-2xl bg-slate-100 px-4 py-2">
                                     <textarea
                                         id="messageInput"
                                         rows="1"
-                                        placeholder="Type a message to this teacher..."
-                                        class="max-h-32 min-h-[46px] w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+                                        placeholder="Aa"
+                                        class="max-h-28 min-h-[28px] flex-1 resize-none border-0 bg-transparent py-1 text-sm text-slate-700 outline-none placeholder:text-slate-400 focus:ring-0"
                                     ></textarea>
 
+                                    <button
+                                        type="button"
+                                        class="ml-2 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-blue-600 transition hover:bg-blue-100"
+                                        title="Add emoji"
+                                    >
+                                        <i data-lucide="smile" class="h-5 w-5"></i>
+                                    </button>
                                 </div>
 
                                 <button
                                     type="submit"
-                                    title="Send Message"
-                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm transition hover:bg-indigo-700"
+                                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-sm transition hover:bg-blue-700 active:scale-95"
+                                    title="Send message"
                                 >
-                                    <i data-lucide="send" class="h-5 w-5"></i>
+                                    <i data-lucide="send" class="h-4 w-4"></i>
                                 </button>
-
                             </form>
-
-                            <p class="mt-2 text-[10px] text-slate-400">
-                                Use this chat for school and enrollment-related communication.
-                            </p>
-
                         </div>
-
                     </section>
 
+                    <aside
+                        id="teacherDetailsPanel"
+                        class="hidden w-[270px] shrink-0 border-l border-slate-200 bg-white xl:flex xl:flex-col"
+                    >
+                        <div class="flex flex-col items-center border-b border-slate-100 px-5 py-8 text-center">
+                            <div
+                                id="detailsTeacherAvatar"
+                                class="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-blue-100 text-2xl font-bold text-blue-700"
+                            >
+                                JD
+                            </div>
+
+                            <h3
+                                id="detailsTeacherName"
+                                class="text-base font-bold text-slate-900"
+                            >
+                                Juan Dela Cruz
+                            </h3>
+
+                            <p
+                                id="detailsTeacherRole"
+                                class="mt-1 text-xs text-slate-400"
+                            >
+                                Faculty Member
+                            </p>
+
+                            <div class="mt-2 flex items-center gap-1.5">
+                                <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                                <span class="text-[11px] font-medium text-emerald-500">
+                                    Active now
+                                </span>
+                            </div>
+
+                            <div class="mt-6 flex items-center gap-3">
+                                <button
+                                    type="button"
+                                    class="flex flex-col items-center gap-1 text-slate-500"
+                                >
+                                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">
+                                        <i data-lucide="user-round" class="h-4 w-4"></i>
+                                    </span>
+                                    <span class="text-[10px]">Profile</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="flex flex-col items-center gap-1 text-slate-500"
+                                >
+                                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">
+                                        <i data-lucide="bell-off" class="h-4 w-4"></i>
+                                    </span>
+                                    <span class="text-[10px]">Mute</span>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="flex flex-col items-center gap-1 text-slate-500"
+                                >
+                                    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">
+                                        <i data-lucide="search" class="h-4 w-4"></i>
+                                    </span>
+                                    <span class="text-[10px]">Search</span>
+                                </button>
+                            </div>
+                        </div>
+                    </aside>
                 </div>
-
-                <footer class="py-5 text-center text-xs text-slate-400">
-                    © 2026 Elementary Enrollment Management System. All rights reserved.
-                </footer>
-
             </div>
-
         </main>
-
-    </main>
-
-</div>
-
-<div
-    id="teacherInfoModal"
-    class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/50 p-4 backdrop-blur-sm"
->
-
-    <div class="w-full max-w-md rounded-2xl bg-white shadow-2xl">
-
-        <div class="flex items-center justify-between border-b border-slate-200 px-6 py-5">
-
-            <div>
-                <h3 class="text-lg font-bold text-slate-900">
-                    Teacher Information
-                </h3>
-
-                <p class="mt-1 text-xs text-slate-500">
-                    Faculty member details
-                </p>
-            </div>
-
-            <button
-                id="closeTeacherInfo"
-                type="button"
-                class="rounded-xl p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
-            >
-                <i data-lucide="x" class="h-5 w-5"></i>
-            </button>
-
-        </div>
-
-        <div class="space-y-4 p-6">
-
-            <div class="flex items-center gap-4 rounded-xl bg-slate-50 p-4">
-
-                <div
-                    id="modalTeacherAvatar"
-                    class="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 font-bold text-white"
-                >
-                    J
-                </div>
-
-                <div>
-                    <p
-                        id="modalTeacherName"
-                        class="font-bold text-slate-900"
-                    >
-                        Juan Dela Cruz
-                    </p>
-
-                    <p
-                        id="modalTeacherRole"
-                        class="text-xs text-slate-500"
-                    >
-                        Grade 1 Adviser
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="grid gap-3 sm:grid-cols-2">
-
-                <div class="rounded-xl border border-slate-200 p-4">
-                    <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400">
-                        Faculty ID
-                    </p>
-
-                    <p
-                        id="modalFacultyId"
-                        class="mt-1 text-sm font-semibold text-slate-800"
-                    >
-                        FAC-001
-                    </p>
-                </div>
-
-                <div class="rounded-xl border border-slate-200 p-4">
-                    <p class="text-[10px] font-bold uppercase tracking-wide text-slate-400">
-                        Department
-                    </p>
-
-                    <p
-                        id="modalDepartment"
-                        class="mt-1 text-sm font-semibold text-slate-800"
-                    >
-                        Elementary
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="border-t border-slate-200 px-6 py-4">
-
-            <button
-                id="closeTeacherInfoBtn"
-                type="button"
-                class="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-            >
-                Close
-            </button>
-
-        </div>
-
     </div>
 
-</div>
+    <div
+        id="teacherInfoModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm"
+    >
+        <div class="w-full max-w-md rounded-2xl bg-white shadow-2xl">
+            <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+                <h2 class="text-base font-bold text-slate-900">
+                    Teacher Information
+                </h2>
 
-<script src="/js/chat.js" defer></script>
+                <button
+                    id="closeTeacherInfo"
+                    type="button"
+                    class="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+                >
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
 
+            <div class="flex flex-col items-center px-5 py-7 text-center">
+                <div
+                    id="modalTeacherAvatar"
+                    class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-blue-100 text-xl font-bold text-blue-700"
+                >
+                    JD
+                </div>
+
+                <h3
+                    id="modalTeacherName"
+                    class="text-lg font-bold text-slate-900"
+                >
+                    Juan Dela Cruz
+                </h3>
+
+                <p
+                    id="modalTeacherRole"
+                    class="mt-1 text-sm text-slate-400"
+                >
+                    Faculty Member
+                </p>
+
+                <div class="mt-6 w-full space-y-3 text-left">
+                    <div class="rounded-xl bg-slate-50 px-4 py-3">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                            Faculty ID
+                        </p>
+                        <p
+                            id="modalFacultyId"
+                            class="mt-1 text-sm font-semibold text-slate-700"
+                        >
+                            FAC-001
+                        </p>
+                    </div>
+
+                    <div class="rounded-xl bg-slate-50 px-4 py-3">
+                        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                            Department
+                        </p>
+                        <p
+                            id="modalDepartment"
+                            class="mt-1 text-sm font-semibold text-slate-700"
+                        >
+                            Information Technology
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 px-5 py-4">
+                <button
+                    id="closeTeacherInfoBtn"
+                    type="button"
+                    class="w-full rounded-xl bg-blue-600 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/chat.js"></script>
 </body>
 </html>
