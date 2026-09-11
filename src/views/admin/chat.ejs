@@ -2,30 +2,111 @@
 <html lang="en">
 <head>
     <%- include('../partials/head', { pageTitle: 'Chat' }) %>
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        #chatLayout,
+        #conversationPanel,
+        #chatPanel {
+            min-height: 0;
+        }
+
+        #conversationList,
+        #messageContainer {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
+
+        #conversationList::-webkit-scrollbar,
+        #messageContainer::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #conversationList::-webkit-scrollbar-track,
+        #messageContainer::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #conversationList::-webkit-scrollbar-thumb,
+        #messageContainer::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 999px;
+        }
+
+        #messageInput {
+            overflow-y: auto;
+        }
+
+        @media (max-width: 1023px) {
+            #chatLayout {
+                border-radius: 0.75rem;
+            }
+
+            #conversationPanel,
+            #chatPanel {
+                height: 100%;
+                min-height: 0;
+            }
+
+            #conversationList,
+            #messageContainer {
+                touch-action: pan-y;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        @media (max-width: 640px) {
+            #chatLayout {
+                border-left: 0;
+                border-right: 0;
+                border-radius: 0;
+            }
+
+            #conversationPanel,
+            #chatPanel {
+                width: 100%;
+            }
+
+            #messageContainer {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            #messageInput {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
 
-<body class="h-screen overflow-hidden bg-slate-100 text-slate-900 antialiased">
-    <div class="flex h-screen w-full overflow-hidden">
+<body class="min-h-[100dvh] overflow-hidden bg-slate-100 text-slate-900 antialiased">
+    <div class="flex h-[100dvh] w-full overflow-hidden">
         <%- include('../partials/sidebar', { activePage: 'chat' }) %>
 
-        <main class="flex min-w-0 flex-1 flex-col overflow-hidden">
+        <main class="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
             <%- include('../partials/navbar', { pageTitle: 'Chat' }) %>
 
-            <div class="flex min-h-0 flex-1 flex-col p-3 sm:p-5 lg:p-6">
+            <div class="flex min-h-0 flex-1 flex-col p-0 sm:p-4 lg:p-6">
                 <div
                     id="chatLayout"
-                    class="mx-auto flex min-h-0 w-full max-w-[1550px] flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+                    class="mx-auto flex h-full min-h-0 w-full max-w-[1550px] flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
                 >
                     <aside
                         id="conversationPanel"
-                        class="flex min-h-0 w-full flex-col border-r border-slate-200 bg-white lg:w-[330px] lg:shrink-0"
+                        class="flex h-full min-h-0 w-full flex-col overflow-hidden border-r border-slate-200 bg-white lg:w-[330px] lg:shrink-0"
                     >
-                        <div class="border-b border-slate-100 px-5 pb-4 pt-5">
+                        <div class="shrink-0 border-b border-slate-100 px-5 pb-4 pt-5">
                             <div class="mb-5 flex items-center justify-between">
                                 <div>
                                     <h1 class="text-2xl font-bold tracking-tight text-slate-900">
                                         Chats
                                     </h1>
+
                                     <p class="mt-1 text-xs text-slate-400">
                                         Connect with faculty members
                                     </p>
@@ -50,12 +131,12 @@
                                     id="chatSearch"
                                     type="search"
                                     placeholder="Search Messenger..."
-                                    class="h-11 w-full rounded-xl border-0 bg-slate-100 pl-11 pr-4 text-sm text-slate-700 outline-none ring-0 placeholder:text-slate-400 focus:bg-slate-50 focus:ring-2 focus:ring-blue-100"
+                                    class="h-11 w-full rounded-xl border-0 bg-slate-100 pl-11 pr-4 text-sm text-slate-700 outline-none placeholder:text-slate-400 focus:bg-slate-50 focus:ring-2 focus:ring-blue-100"
                                 />
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between px-5 py-3">
+                        <div class="flex shrink-0 items-center justify-between px-5 py-3">
                             <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">
                                 Recent chats
                             </h2>
@@ -70,7 +151,7 @@
 
                         <div
                             id="conversationList"
-                            class="min-h-0 flex-1 space-y-1 overflow-y-auto px-3 pb-4"
+                            class="min-h-0 flex-1 space-y-1 overflow-x-hidden overflow-y-auto overscroll-contain px-3 pb-4"
                         >
                             <button
                                 type="button"
@@ -78,7 +159,7 @@
                                 data-teacher-id="teacher-1"
                             >
                                 <div class="relative shrink-0">
-                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-blue-100 text-sm font-bold text-blue-700">
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">
                                         JD
                                     </div>
 
@@ -114,7 +195,7 @@
                                 data-teacher-id="teacher-2"
                             >
                                 <div class="relative shrink-0">
-                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-pink-100 text-sm font-bold text-pink-700">
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-pink-100 text-sm font-bold text-pink-700">
                                         MS
                                     </div>
 
@@ -150,7 +231,7 @@
                                 data-teacher-id="teacher-3"
                             >
                                 <div class="relative shrink-0">
-                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-amber-100 text-sm font-bold text-amber-700">
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-amber-100 text-sm font-bold text-amber-700">
                                         MR
                                     </div>
 
@@ -186,7 +267,7 @@
                                 data-teacher-id="teacher-4"
                             >
                                 <div class="relative shrink-0">
-                                    <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-violet-100 text-sm font-bold text-violet-700">
+                                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-violet-100 text-sm font-bold text-violet-700">
                                         AM
                                     </div>
 
@@ -220,7 +301,7 @@
 
                     <section
                         id="chatPanel"
-                        class="hidden min-h-0 min-w-0 flex-1 flex-col bg-white lg:flex"
+                        class="hidden h-full min-h-0 min-w-0 flex-1 flex-col overflow-hidden bg-white lg:flex"
                     >
                         <header class="flex h-[78px] shrink-0 items-center justify-between border-b border-slate-200 px-4 sm:px-6">
                             <div class="flex min-w-0 items-center gap-3">
@@ -309,14 +390,11 @@
 
                         <div
                             id="messageContainer"
-                            class="min-h-0 flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top,_#f8fbff,_#ffffff_45%)] px-4 py-6 sm:px-8"
+                            class="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain bg-[radial-gradient(circle_at_top,_#f8fbff,_#ffffff_45%)] px-3 py-5 sm:px-8 sm:py-6"
                         ></div>
 
-                        <div class="shrink-0 border-t border-slate-100 bg-white px-3 py-3 sm:px-6 sm:py-4">
-                            <form
-                                id="messageForm"
-                                class="flex items-end gap-2"
-                            >
+                        <div class="relative z-10 shrink-0 border-t border-slate-100 bg-white px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-6 sm:py-4">
+                            <form id="messageForm" class="flex items-end gap-2">
                                 <button
                                     type="button"
                                     class="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-100 sm:flex"
@@ -381,6 +459,7 @@
 
                             <div class="mt-2 flex items-center gap-1.5">
                                 <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+
                                 <span class="text-[11px] font-medium text-emerald-500">
                                     Active now
                                 </span>
@@ -394,6 +473,7 @@
                                     <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">
                                         <i data-lucide="user-round" class="h-4 w-4"></i>
                                     </span>
+
                                     <span class="text-[10px]">Profile</span>
                                 </button>
 
@@ -404,6 +484,7 @@
                                     <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">
                                         <i data-lucide="bell-off" class="h-4 w-4"></i>
                                     </span>
+
                                     <span class="text-[10px]">Mute</span>
                                 </button>
 
@@ -414,8 +495,41 @@
                                     <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100">
                                         <i data-lucide="search" class="h-4 w-4"></i>
                                     </span>
+
                                     <span class="text-[10px]">Search</span>
                                 </button>
+                            </div>
+                        </div>
+
+                        <div class="border-b border-slate-100">
+                            <button
+                                type="button"
+                                class="flex w-full items-center justify-between px-5 py-4 text-left"
+                            >
+                                <span class="text-xs font-semibold text-slate-700">
+                                    Customize Chat
+                                </span>
+
+                                <i data-lucide="chevron-down" class="h-4 w-4 text-slate-400"></i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <button
+                                type="button"
+                                class="flex w-full items-center justify-between px-5 py-4 text-left"
+                            >
+                                <span class="text-xs font-semibold text-slate-700">
+                                    Media, Files and Links
+                                </span>
+
+                                <i data-lucide="chevron-down" class="h-4 w-4 text-slate-400"></i>
+                            </button>
+
+                            <div class="grid grid-cols-3 gap-2 px-5 pb-5">
+                                <div class="h-16 rounded-lg bg-gradient-to-br from-blue-100 to-blue-300"></div>
+                                <div class="h-16 rounded-lg bg-gradient-to-br from-amber-100 to-orange-200"></div>
+                                <div class="h-16 rounded-lg bg-gradient-to-br from-emerald-100 to-teal-200"></div>
                             </div>
                         </div>
                     </aside>
@@ -470,6 +584,7 @@
                         <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                             Faculty ID
                         </p>
+
                         <p
                             id="modalFacultyId"
                             class="mt-1 text-sm font-semibold text-slate-700"
@@ -482,6 +597,7 @@
                         <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                             Department
                         </p>
+
                         <p
                             id="modalDepartment"
                             class="mt-1 text-sm font-semibold text-slate-700"

@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const teachers = {
         'teacher-1': {
-            id: 'teacher-1',
             name: 'Juan Dela Cruz',
             initials: 'JD',
             role: 'Faculty Member',
@@ -34,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         'teacher-2': {
-            id: 'teacher-2',
             name: 'Maria Santos',
             initials: 'MS',
             role: 'Senior Faculty Member',
@@ -57,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         'teacher-3': {
-            id: 'teacher-3',
             name: 'Mark Reyes',
             initials: 'MR',
             role: 'Faculty Member',
@@ -80,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         'teacher-4': {
-            id: 'teacher-4',
             name: 'Ana Mendoza',
             initials: 'AM',
             role: 'Faculty Member',
@@ -142,16 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return teachers[activeTeacherId];
     }
 
-    function createAvatarElement(teacher, size = 'small') {
+    function createAvatarElement(teacher) {
         const avatar = document.createElement('div');
 
-        const sizeClass = size === 'large'
-            ? 'h-24 w-24 text-2xl'
-            : size === 'medium'
-                ? 'h-11 w-11 text-sm'
-                : 'h-8 w-8 text-xs';
-
-        avatar.className = `flex shrink-0 items-center justify-center rounded-full font-bold ${sizeClass} ${teacher.avatarClass}`;
+        avatar.className = `flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${teacher.avatarClass}`;
         avatar.textContent = teacher.initials;
 
         return avatar;
@@ -174,20 +164,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         teacher.messages.forEach(message => {
             const row = document.createElement('div');
-            row.className = `mb-5 flex w-full ${message.sender === 'admin' ? 'justify-end' : 'justify-start'}`;
+
+            row.className = `mb-5 flex w-full ${
+                message.sender === 'admin'
+                    ? 'justify-end'
+                    : 'justify-start'
+            }`;
 
             const wrapper = document.createElement('div');
-            wrapper.className = `flex max-w-[85%] items-end gap-2 sm:max-w-[70%] ${message.sender === 'admin' ? 'flex-row-reverse' : 'flex-row'}`;
+
+            wrapper.className = `flex max-w-[88%] items-end gap-2 sm:max-w-[70%] ${
+                message.sender === 'admin'
+                    ? 'flex-row-reverse'
+                    : 'flex-row'
+            }`;
 
             if (message.sender === 'teacher') {
-                const avatar = createAvatarElement(teacher, 'small');
-                wrapper.appendChild(avatar);
+                wrapper.appendChild(createAvatarElement(teacher));
             }
 
             const content = document.createElement('div');
-            content.className = `flex flex-col ${message.sender === 'admin' ? 'items-end' : 'items-start'}`;
+
+            content.className = `flex flex-col ${
+                message.sender === 'admin'
+                    ? 'items-end'
+                    : 'items-start'
+            }`;
 
             const bubble = document.createElement('div');
+
             bubble.className = message.sender === 'admin'
                 ? 'rounded-2xl rounded-br-md bg-blue-600 px-4 py-3 text-sm leading-relaxed text-white shadow-sm'
                 : 'rounded-2xl rounded-bl-md bg-slate-100 px-4 py-3 text-sm leading-relaxed text-slate-700';
@@ -195,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bubble.textContent = message.text;
 
             const time = document.createElement('span');
+
             time.className = 'mt-1 px-1 text-[10px] text-slate-400';
             time.textContent = message.time;
 
@@ -205,7 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
             messageContainer.appendChild(row);
         });
 
-        messageContainer.scrollTop = messageContainer.scrollHeight;
+        requestAnimationFrame(() => {
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        });
     }
 
     function updateChatHeader() {
@@ -221,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chatUserName.textContent = teacher.name;
         chatUserRole.textContent = teacher.role;
         chatUserStatus.textContent = teacher.status;
+
         chatUserStatus.className = teacher.online
             ? 'text-[10px] font-medium text-emerald-500'
             : 'text-[10px] font-medium text-slate-400';
@@ -239,10 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateConversationStyles() {
-        const conversationItems = document.querySelectorAll('.conversation-item');
-
-        conversationItems.forEach(item => {
-            const teacher = teachers[item.dataset.teacherId];
+        document.querySelectorAll('.conversation-item').forEach(item => {
             const isActive = item.dataset.teacherId === activeTeacherId;
 
             item.className = isActive
@@ -272,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     : 'conversation-preview truncate text-xs text-slate-400';
             }
 
-            if (unread && teacher) {
+            if (unread) {
                 unread.className = isActive
                     ? 'conversation-unread hidden h-5 min-w-5 items-center justify-center rounded-full bg-white px-1.5 text-[10px] font-bold text-blue-600'
                     : 'conversation-unread hidden h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1.5 text-[10px] font-bold text-white';
@@ -280,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function selectTeacher(teacherId, showMobileChat = true) {
+    function selectTeacher(teacherId, openMobileChat = true) {
         if (!teachers[teacherId]) {
             return;
         }
@@ -291,8 +297,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateConversationStyles();
         renderMessages();
 
-        if (showMobileChat && window.innerWidth < 1024) {
+        if (openMobileChat && window.innerWidth < 1024) {
             conversationPanel.classList.add('hidden');
+            conversationPanel.classList.remove('flex');
+
             chatPanel.classList.remove('hidden');
             chatPanel.classList.add('flex');
         }
@@ -315,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.classList.toggle('hidden', !matches);
 
             if (matches) {
-                visibleCount += 1;
+                visibleCount++;
             }
         });
 
@@ -334,13 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('overflow-hidden');
     }
 
-    function getCurrentTime() {
-        return new Date().toLocaleTimeString([], {
-            hour: 'numeric',
-            minute: '2-digit'
-        });
-    }
-
     function sendMessage() {
         const text = messageInput.value.trim();
 
@@ -353,7 +354,10 @@ document.addEventListener('DOMContentLoaded', () => {
         teacher.messages.push({
             sender: 'admin',
             text,
-            time: getCurrentTime()
+            time: new Date().toLocaleTimeString([], {
+                hour: 'numeric',
+                minute: '2-digit'
+            })
         });
 
         messageInput.value = '';
@@ -391,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileChatBackBtn.addEventListener('click', () => {
         chatPanel.classList.add('hidden');
         chatPanel.classList.remove('flex');
+
         conversationPanel.classList.remove('hidden');
         conversationPanel.classList.add('flex');
     });
@@ -415,6 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth >= 1024) {
             conversationPanel.classList.remove('hidden');
             conversationPanel.classList.add('flex');
+
             chatPanel.classList.remove('hidden');
             chatPanel.classList.add('flex');
         }
